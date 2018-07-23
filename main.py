@@ -4,6 +4,8 @@ import jinja2
 import os
 from google.appengine.api import users
 from google.appengine.ext import ndb
+import logging
+
 
 users = []
 TEMPLATE = jinja2.Environment(
@@ -24,10 +26,23 @@ class CssiUser(ndb.Model):
 	password = ndb.StringProperty()
 	location = ndb.StringProperty()
 
+class Books(ndb.model):
+	title = ndb.StringProperty()
+	author = ndb.StringProperty()
+	publication date = ndb.StringProperty()
+	id = ndb.StringProperty()
+	synopsis = ndb.StringProperty()
+
 class HomePage(webapp2.RequestHandler):
 	def get(self):
 		content = TEMPLATE.get_template('/templates/home.html')
 		self.response.write(content.render(active = logged_in))
+		hamlet = Books(
+			title = "hamlet"
+			author = "shakespeare"
+		)
+		Macbeth = books()
+		self.response.write(content.render(title= hamlet.title, author = hamlet.author))
 
 
 class MainHandler(webapp2.RequestHandler):
