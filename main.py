@@ -17,6 +17,25 @@ TEMPLATE = jinja2.Environment(
 
 logged_in = False
 
+
+class Books(ndb.model):
+	title = ndb.StringProperty()
+	author = ndb.StringProperty()
+	id = ndb.StringProperty()
+	persons_input = ndb.IntegerProperty()
+	bookindex = ndb.IntegerProperty(repeat=True)
+
+class HomePage(webapp2.RequestHandler):
+	def get(self):
+		content = TEMPLATE.get_template('/templates/home.html')
+		self.response.write(content.render(active = logged_in))
+		hamlet = Books(
+			title = "hamlet"
+			author = "shakespeare"
+		)
+		Macbeth = books()
+		self.response.write(content.render(title= hamlet.title, author = hamlet.author))
+
 class CssiUser(ndb.Model):
 
   	first_name = ndb.StringProperty()
