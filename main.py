@@ -5,7 +5,7 @@ import os
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
-
+users = []
 TEMPLATE = jinja2.Environment(
 	loader = jinja2.FileSystemLoader(os.path.dirname(__file__)),
 	extensions = ['jinja2.ext.autoescape'],
@@ -35,42 +35,19 @@ class MainHandler(webapp2.RequestHandler):
     # user = users.get_current_user()
 
     content = TEMPLATE.get_template('/templates/signup.html')
-	# params = {
-	# 	'success' : False
-	# 	'failure' : False
-	# 	'user' : user
-	# }
-    # If the user is logged in...
+
     if logged_in:
-		# params['success'] = True
-		signout_link_html = users.create_logout_url('/')
-		self.response.write(content.render(success = True, user = user, logout = signout_link_html))
-      # email_address = user.nickname()
-      # cssi_user = CssiUser.get_by_id(user.user_id())
-      # # If the user has previously been to our site, we greet them!
-      # if cssi_user:
-      #   self.response.write('''
-      #       Welcome %s %s (%s)! <br> %s <br>''' % (
-      #         cssi_user.first_name,
-      #         cssi_user.last_name,
-      #         email_address,
-      #         signout_link_html))
-      ## If the user hasn't been to our site, we ask them to sign up
-      # else:
-      #   self.response.write(content.render() % (email_address, signout_link_html))
-    # Otherwise, the user isn't logged in!
+
+		self.response.write(content.render(success = True, user = user))
     else:
 
 		self.response.write(content.render(failure = True))
-      # self.response.write('''
-      #   Please log in to use our site! <br>
-      #   <a href="%s">Sign in</a>''' % (
-      #     users.create_login_url('/')))
+
 
   def post(self):
 	  logged_in = True
 	  content = TEMPLATE.get_template('/templates/signup.html')
-	  user = users.get_current_user()
+	  # user = users.get_current_user()
 	    # if not user:
 	    #   # You shouldn't be able to get here without being logged in
 	    #   self.error(500)
@@ -82,13 +59,42 @@ class MainHandler(webapp2.RequestHandler):
 		    email = self.request.get('Email'),
 		    password = self.request.get('Password'),
 		    location = self.request.get('location'))
+	  #
+	  # user = cssi_user.all()
+	  # print user
+
+
+
 	  cssi_user.put()
-	  signout_link_html = users.create_logout_url('/')
-	  self.response.write(content.render(success = True, user = cssi_user.first_name, logout = signout_link_html))
+	  users.append(cssi_user)
+	  self.response.write(content.render(success = True, user = cssi_user.first_name))
 
 class LoginHandler(webapp2.RequestHandler):
 	def get(self):
-		print ("Login handler works")
+	  	content = TEMPLATE.get_template('/templates/signIn.html')
+		self.response.write(content.render(start = True))
+
+	def post(self):
+		username = self.request.get("Username")
+		password = self.request.get("Password")
+		content = TEMPLATE.get_template('/templates/signIn.html')
+		self.response.write(content.render(start = False))
+		# user_key =  CssiUser.all()
+
+		q = CssiUser.query().fetch()
+		for user in q:
+			content = TEMPLATE.get_template('/templates/signup.html')
+			if user.username == username and user.password == password:
+				logged_in = True
+				self.response.clear()
+				self.response.write(content.render(success = logged_in, user = user.first_name))
+		self.response.clear()
+		content = TEMPLATE.get_template('/templates/signIn.html')
+		self.response.write(content.render(start = True, error = True, Username = username, Password = password))
+		# ndb.Query()
+		# q.filter("username = ", self.response.get("Username"))
+		# print q
+
 
 app = webapp2.WSGIApplication([
   ('/', HomePage),
