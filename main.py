@@ -28,14 +28,19 @@ class MainHandler(webapp2.RequestHandler):
   def get(self):
     user = users.get_current_user()
     content = TEMPLATE.get_template('/templates/signup.html')
+	# params = {
+	# 	'success' : False
+	# 	'failure' : False
+	# 	'user' : user
+	# }
     # If the user is logged in...
     if user:
-
-		self.response.write(content.render(logged = True))
+		# params['success'] = True
+		signout_link_html = users.create_logout_url('/')
+		self.response.write(content.render(success = True, user = user, logout = signout_link_html))
       # email_address = user.nickname()
       # cssi_user = CssiUser.get_by_id(user.user_id())
-      # signout_link_html = '<a href="%s">sign out</a>' % (
-      #     users.create_logout_url('/'))
+
       # # If the user has previously been to our site, we greet them!
       # if cssi_user:
       #   self.response.write('''
@@ -49,7 +54,8 @@ class MainHandler(webapp2.RequestHandler):
       #   self.response.write(content.render() % (email_address, signout_link_html))
     # Otherwise, the user isn't logged in!
     else:
-		self.response.write(content.render(logged = false))
+
+		self.response.write(content.render(failure = True))
       # self.response.write('''
       #   Please log in to use our site! <br>
       #   <a href="%s">Sign in</a>''' % (

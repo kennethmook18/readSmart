@@ -28,6 +28,8 @@ html,
 body {
   height: 100%;
   background-color: #333;
+  font-family: 'Ubuntu', sans-serif;
+
 }
 
 body {
@@ -52,6 +54,7 @@ body {
 
 .masthead-brand {
   margin-bottom: 0;
+  font-family: 'Russo One', sans-serif;
 }
 
 .nav-masthead .nav-link {
@@ -103,4 +106,9 @@ body {
  */
 .mastfoot {
   color: rgba(255, 255, 255, .5);
+}
+
+#login_form{
+  margin-left: 550px;
+  margin-top: 50px;
 }
