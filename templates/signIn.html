@@ -7,13 +7,17 @@
 
   <link href="/css/cover.css" rel="stylesheet">
   <title>Sign In</title>
+  <script>
+      // let access = sessionStorage.getItem('logged_in');
+      //
+  </script>
   </head>
       {% if start %}
       <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <header class="masthead mb-auto">
           <div class="inner">
-            <h3 class="masthead-brand"> readSmart</h3>
-            <!-- <img src="/img/logo.png" alt="Logo"> -->
+
+            <h3 class="masthead-brand"> <a href="/">readSmart<a></h3>
             <nav class="nav nav-masthead justify-content-center">
               <a class="nav-link active" href="/">Home</a>
               <a class="nav-link" href="#">Productivity</a>
@@ -23,6 +27,8 @@
         </header>
 
         <main role="main" class="inner cover">
+          <img src="/img/logo.png" alt="Logo">
+
           <h1 class="cover-heading">Please Sign In</h1>
           <!-- <p class="lead">Welcome to our application, where you can figure out how long something you're planning to do might take, and you can organize your schedule to become more productive</p> -->
           <form id = "sign_in" action="/signIn" method="post">
@@ -47,11 +53,12 @@
 
             {% if error %}
               <p class = "error">Incorrect username or password<p>
-                {% endif %}
+            {% endif %}
 
                 <footer class="mastfoot mt-auto">
                   <div class="inner">
-                    <p>Project by Federick Gonzalez, Casey Mook, and Jaylen Patterson</p>
+                    <p>readSmart&copy; Federick Gonzalez, Casey Mook, and Jaylen Patterson</p>
+
                   </div>
                 </footer>
         </div>

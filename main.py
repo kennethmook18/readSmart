@@ -4,6 +4,8 @@ import jinja2
 import os
 from google.appengine.api import users
 from google.appengine.ext import ndb
+import logging
+
 
 users = []
 TEMPLATE = jinja2.Environment(
@@ -43,10 +45,23 @@ class CssiUser(ndb.Model):
 	password = ndb.StringProperty()
 	location = ndb.StringProperty()
 
+class Books(ndb.model):
+	title = ndb.StringProperty()
+	author = ndb.StringProperty()
+	publication date = ndb.StringProperty()
+	id = ndb.StringProperty()
+	synopsis = ndb.StringProperty()
+
 class HomePage(webapp2.RequestHandler):
 	def get(self):
 		content = TEMPLATE.get_template('/templates/home.html')
-		self.response.write(content.render())
+		self.response.write(content.render(active = logged_in))
+		hamlet = Books(
+			title = "hamlet"
+			author = "shakespeare"
+		)
+		Macbeth = books()
+		self.response.write(content.render(title= hamlet.title, author = hamlet.author))
 
 
 class MainHandler(webapp2.RequestHandler):
@@ -107,9 +122,11 @@ class LoginHandler(webapp2.RequestHandler):
 				logged_in = True
 				self.response.clear()
 				self.response.write(content.render(success = logged_in, user = user.first_name))
-		self.response.clear()
-		content = TEMPLATE.get_template('/templates/signIn.html')
-		self.response.write(content.render(start = True, error = True, Username = username, Password = password))
+
+		if not logged_in:
+			passself.response.clear()
+			content = TEMPLATE.get_template('/templates/signIn.html')
+			self.response.write(content.render(start = True, error = True, Username = username, Password = password))
 		# ndb.Query()
 		# q.filter("username = ", self.response.get("Username"))
 		# print q
