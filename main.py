@@ -131,8 +131,6 @@ class LoginHandler(webapp2.RequestHandler):
 		# q.filter("username = ", self.response.get("Username"))
 		# print q
 
-# booksindex = []
-
 def average(persons_input, title):
 	b = books.query().fetch()
 	for book in b:
