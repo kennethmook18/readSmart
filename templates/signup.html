@@ -42,7 +42,7 @@
 
     {% if failure %}
     <body>
-      <form data-toggle="validator" id = "login_form" action="/" method="post">
+      <form data-toggle="validator" id = "login_form" action="/login" method="post">
         <div class="form-group valid-form">
           <input type="text" class="form-control" id="inputName" name="firstname" placeholder="First Name" required="">
         </div>
@@ -74,11 +74,7 @@
         <div class="form-group">
 
 
-        <div class="form-group valid-form">
-          <label>Non-Binary</label>
-          <input type="text" class="form-control" id="inputName" name="gender" placeholder="Gender">
 
-        </div>
           <label> Location</label>
           <select name = "location">
             <option value="AL">Alabama</option>
@@ -148,7 +144,7 @@
 
         </div>
         <div class="form-group">
-          <button type="submit" class="btn btn-primary disabled">Submit</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </div>
 
       </form>
