@@ -110,5 +110,9 @@ body {
 
 #login_form{
   margin-left: 550px;
-  margin-top: 50px;
+  margin-top: 100px;
+}
+
+#title{
+  font-family: 'Russo One', sans-serif;
 }
