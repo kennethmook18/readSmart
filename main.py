@@ -48,20 +48,21 @@ class CssiUser(ndb.Model):
 class Books(ndb.model):
 	title = ndb.StringProperty()
 	author = ndb.StringProperty()
-	publication date = ndb.StringProperty()
 	id = ndb.StringProperty()
-	synopsis = ndb.StringProperty()
+	persons_input = ndb.IntegerProperty()
+	bookindex = ndb.IntegerProperty(repeat=True)
+
 
 class HomePage(webapp2.RequestHandler):
 	def get(self):
 		content = TEMPLATE.get_template('/templates/home.html')
 		self.response.write(content.render(active = logged_in))
-		hamlet = Books(
-			title = "hamlet"
-			author = "shakespeare"
-		)
-		Macbeth = books()
-		self.response.write(content.render(title= hamlet.title, author = hamlet.author))
+		# hamlet = Books(
+		# 	title = "hamlet"
+		# 	author = "shakespeare"
+		# )
+		# Macbeth = books()
+		# self.response.write(content.render(title= hamlet.title, author = hamlet.author))
 
 
 class MainHandler(webapp2.RequestHandler):
