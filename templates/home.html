@@ -30,8 +30,10 @@
 
           <nav class="nav nav-masthead justify-content-center">
             <a class="nav-link active" href="/">Home</a>
-            <!-- <a class="nav-link" href="#">Productivity</a>
-            <a class="nav-link" href="#">Items</a> -->
+            {% if active %}
+            <a class="nav-link" href="#">Productivity</a>
+            <a class="nav-link" href="#">Items</a>
+            {% endif %}
           </nav>
         </div>
       </header>

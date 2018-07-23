@@ -7,6 +7,10 @@
 
   <link href="/css/cover.css" rel="stylesheet">
   <title>Sign In</title>
+  <script>
+      // let access = sessionStorage.getItem('logged_in');
+      //
+  </script>
   </head>
       {% if start %}
       <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
@@ -49,12 +53,12 @@
 
             {% if error %}
               <p class = "error">Incorrect username or password<p>
-                {% endif %}
+            {% endif %}
 
                 <footer class="mastfoot mt-auto">
                   <div class="inner">
                     <p>readSmart&copy; Federick Gonzalez, Casey Mook, and Jaylen Patterson</p>
-                    
+
                   </div>
                 </footer>
         </div>
