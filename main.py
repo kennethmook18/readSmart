@@ -23,12 +23,14 @@ TEMPLATE = jinja2.Environment(
 
 
 class HomePage(webapp2.RequestHandler):
+
 	def get(self):
 		content = TEMPLATE.get_template('/templates/home.html')
-		# if logged_in:
-			# self.response.write(content.render(active = True))
-		# else:
-		self.response.write(content.render(login = True))
+
+		if self.request.cookies.get("logged_in") == "True":
+			self.response.write(content.render(active = True))
+		else:
+			self.response.write(content.render(login = True))
 		#
 		# hamlet = Books(
 		# 	title = "hamlet",
@@ -53,15 +55,15 @@ class MainHandler(webapp2.RequestHandler):
     # user = users.get_current_user()
 		content = TEMPLATE.get_template('/templates/signup.html')
 
-		    # if logged_in:
-			#
-			# 	self.response.write(content.render(success = True, user = user))
-		    # else:
-		self.response.write(content.render(failure = True))
+		if self.request.cookies.get("logged_in") == "True":
+
+			self.response.write(content.render(success = True, user = user))
+		else:
+			self.response.write(content.render(failure = True))
 
 
  	def post(self):
-		logged_in = True
+		# logged_in = True
 		content = TEMPLATE.get_template('/templates/signup.html')
 	  # user = users.get_current_user()
 	    # if not user:
@@ -110,7 +112,7 @@ class LoginHandler(webapp2.RequestHandler):
 			else:
 				self.response.delete_cookie("logged_in")
 
-		if not logged_in:
+		if self.request.cookies.get("logged_in") == "":
 			self.response.clear()
 			content = TEMPLATE.get_template('/templates/signIn.html')
 			self.response.write(content.render(start = True, error = True, Username = username, Password = password))
@@ -125,6 +127,13 @@ class BookHandler(webapp2.RequestHandler):
 		# have a bunch of {{ placeholders }} and then do
 		# self.response.write(content.render(book.value for all the placeholders))
 
+class UserInput(webapp2.RequestHandler):
+	def get(self):
+		content = TEMPLATE.get_template('/templates/UserInput.html')
+		self.response.write(content.render(title = "book variable"))
+		# print "Class is functional"
+
+
 
 def average(persons_input, title):
 	b = Books.query().fetch()
@@ -138,5 +147,6 @@ def average(persons_input, title):
 app = webapp2.WSGIApplication([
   ('/', HomePage),
   ('/login', MainHandler),
-  ('/signIn', LoginHandler)
+  ('/signIn', LoginHandler),
+  ('/input', UserInput)
 ], debug=True)
