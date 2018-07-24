@@ -1,7 +1,7 @@
-
 import webapp2
 import jinja2
 import os
+from books import *
 from google.appengine.api import users
 from google.appengine.ext import ndb
 import logging
@@ -18,23 +18,21 @@ TEMPLATE = jinja2.Environment(
 logged_in = False
 
 
-class Books(ndb.model):
-	title = ndb.StringProperty()
-	author = ndb.StringProperty()
-	id = ndb.StringProperty()
-	persons_input = ndb.IntegerProperty()
-	bookindex = ndb.IntegerProperty()
 
 class HomePage(webapp2.RequestHandler):
 	def get(self):
 		content = TEMPLATE.get_template('/templates/home.html')
-		self.response.write(content.render(active = logged_in))
-		hamlet = Books(
-			title = "hamlet",
-			author = "shakespeare"
-		)
-		Macbeth = books()
-		self.response.write(content.render(title= hamlet.title, author = hamlet.author))
+		if logged_in:
+			self.response.write(content.render(active = logged_in))
+		else:
+			self.response.write(content.render(login = True))
+		#
+		# hamlet = Books(
+		# 	title = "hamlet",
+		# 	author = "shakespeare"
+		# )
+		# Macbeth = books()
+		# self.response.write(content.render(title= hamlet.title, author = hamlet.author))
 
 class CssiUser(ndb.Model):
 
@@ -45,17 +43,6 @@ class CssiUser(ndb.Model):
 	password = ndb.StringProperty()
 	location = ndb.StringProperty()
 
-
-class HomePage(webapp2.RequestHandler):
-	def get(self):
-		content = TEMPLATE.get_template('/templates/home.html')
-		self.response.write(content.render(active = logged_in))
-		# hamlet = Books(
-		# 	title = "hamlet"
-		# 	author = "shakespeare"
-		# )
-		# Macbeth = books()
-		# self.response.write(content.render(title= hamlet.title, author = hamlet.author))
 
 
 class MainHandler(webapp2.RequestHandler):
@@ -106,6 +93,7 @@ class LoginHandler(webapp2.RequestHandler):
 		username = self.request.get("Username")
 		password = self.request.get("Password")
 		content = TEMPLATE.get_template('/templates/signIn.html')
+
 		self.response.write(content.render(start = False))
 		# user_key =  CssiUser.all()
 
@@ -116,9 +104,13 @@ class LoginHandler(webapp2.RequestHandler):
 				logged_in = True
 				self.response.clear()
 				self.response.write(content.render(success = logged_in, user = user.first_name))
+				return
+			else:
+				logged_in = False
+
 
 		if not logged_in:
-			passself.response.clear()
+			self.response.clear()
 			content = TEMPLATE.get_template('/templates/signIn.html')
 			self.response.write(content.render(start = True, error = True, Username = username, Password = password))
 		# ndb.Query()
