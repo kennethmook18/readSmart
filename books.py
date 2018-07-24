@@ -74,9 +74,12 @@ class BookHandler(webapp2.RequestHandler):
 
 class BookView():
 	def get(self):
+		content = TEMPLATE.get_template('/templates/books.html')
 		name = self.request.get("title")
 		q = Books.query().fetch()
 		for item in q:
+			if title = item.title:
+				self.response.write(content.render())
 
 
 
