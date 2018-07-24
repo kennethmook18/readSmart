@@ -5,12 +5,11 @@
   <link href="https://fonts.googleapis.com/css?family=Orbitron|Russo+One" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 
+
   <link href="/css/cover.css" rel="stylesheet">
   <title>Sign In</title>
-  <script>
-      // let access = sessionStorage.getItem('logged_in');
-      //
-  </script>
+  <link rel="shortcut icon" type="image/x-icon" href="/img/logo2.png"/>
+
   </head>
       {% if start %}
       <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
@@ -52,7 +51,7 @@
             {% endif %}
 
             {% if error %}
-              <p class = "error">Incorrect username or password<p>
+              <p class = "error" style="color: red">Incorrect username or password<p>
             {% endif %}
 
                 <footer class="mastfoot mt-auto">

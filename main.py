@@ -100,7 +100,7 @@ class LoginHandler(webapp2.RequestHandler):
 		q = CssiUser.query().fetch()
 		for user in q:
 			content = TEMPLATE.get_template('/templates/signup.html')
-			if user.username == username and user.password == password:
+			if (user.username == username and user.password == password) or (user.email == username and user.password == password):
 				logged_in = True
 				self.response.clear()
 				self.response.write(content.render(success = logged_in, user = user.first_name))
