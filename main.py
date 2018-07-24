@@ -17,13 +17,14 @@ TEMPLATE = jinja2.Environment(
 
 logged_in = False
 
+#
+# class Books(ndb.model):
+# 	title = ndb.StringProperty()
+# 	author = ndb.StringProperty()
+# 	id = ndb.StringProperty()
+# 	persons_input = ndb.IntegerProperty()
+# 	bookindex = ndb.IntegerProperty()
 
-class Books(ndb.model):
-	title = ndb.StringProperty()
-	author = ndb.StringProperty()
-	id = ndb.StringProperty()
-	persons_input = ndb.IntegerProperty()
-	bookindex = ndb.IntegerProperty()
 
 class HomePage(webapp2.RequestHandler):
 	def get(self):
@@ -116,14 +117,25 @@ class LoginHandler(webapp2.RequestHandler):
 				logged_in = True
 				self.response.clear()
 				self.response.write(content.render(success = logged_in, user = user.first_name))
+				return
+			else:
+				logged_in = False
 
 		if not logged_in:
-			passself.response.clear()
+			self.response.clear()
 			content = TEMPLATE.get_template('/templates/signIn.html')
 			self.response.write(content.render(start = True, error = True, Username = username, Password = password))
 		# ndb.Query()
 		# q.filter("username = ", self.response.get("Username"))
 		# print q
+
+class BookHandler(webapp2.RequestHandler):
+	def get(self):
+		content = TEMPLATE.get_template('/templates/book.html')
+		# create a new html class names Books
+		# have a bunch of {{ placeholders }} and then do
+		# self.response.write(content.render(book.value for all the placeholders))
+
 
 def average(persons_input, title):
 	b = Books.query().fetch()
