@@ -35,7 +35,7 @@ class BookHandler(webapp2.RequestHandler):
 		    <link href="https://fonts.googleapis.com/css?family=Orbitron|Russo+One" rel="stylesheet">
 		    <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
 			<link rel="stylesheet" type="text/css" href="css/main.css">
-			
+
 
 
 		    <link href="/css/cover.css" rel="stylesheet">
@@ -71,6 +71,12 @@ class BookHandler(webapp2.RequestHandler):
 			</div>
   			</footer>
 		""")
+
+class BookView():
+	def get(self):
+		name = self.request.get("title")
+		q = Books.query().fetch()
+		for item in q:
 
 
 
