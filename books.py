@@ -72,14 +72,15 @@ class BookHandler(webapp2.RequestHandler):
   			</footer>
 		""")
 
-class BookView():
+class BookView(webapp2.RequestHandler):
 	def get(self):
 		content = TEMPLATE.get_template('/templates/books.html')
 		name = self.request.get("title")
 		q = Books.query().fetch()
 		for item in q:
-			if title = item.title:
-				self.response.write(content.render())
+			if name == item.title:
+				self.response.write(content.render(title = item.title, id = item.id, author = item.author))
+				return
 
 
 
