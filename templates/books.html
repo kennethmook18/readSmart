@@ -1,0 +1,29 @@
+<html>
+        <head>
+          <link rel="stylesheet" type="text/css" href="css/main.css">
+          <br>
+            <a href= "/practice.html"> Go back to Homepage</a>
+          <br>
+        </head>
+        <body>
+              <br>
+              <h1> {{ title }} </h1>
+              <br>
+              <center><img src="/img/lordflies.jpeg" alt="Lordflies Cover"></center>
+              <br>
+              <p> {{ author }} </p>
+              <br>
+              <p> {{ synopsis }}</p>
+        </body>
+      </html><!-- Jaylen I made a books class if you want it-
+
+class Books(ndb.Model):
+	title = ndb.StringProperty()
+	author = ndb.StringProperty()
+	id = ndb.StringProperty()
+	persons_input = ndb.IntegerProperty()
+	bookindex = ndb.IntegerProperty()
+->
+
+main page button link
+<a href= "/blah"> Go back to blah page</a>
