@@ -122,5 +122,5 @@ app = webapp2.WSGIApplication([
   ('/login', MainHandler),
   ('/signIn', LoginHandler),
   ('/input', UserInput),
-  ('/books', BookHandler)
+  ('/booklist', BookHandler)
 ], debug=True)
