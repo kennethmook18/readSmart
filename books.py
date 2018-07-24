@@ -14,4 +14,4 @@ class Books(ndb.Model):
 	bookindex = ndb.IntegerProperty()
 
 class BookHandler(webapp2.RequestHandler):
-	print ""
+    print("this works")
