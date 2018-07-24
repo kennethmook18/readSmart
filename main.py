@@ -14,14 +14,6 @@ TEMPLATE = jinja2.Environment(
 )
 
 
-# class Books(ndb.model):
-# 	title = ndb.StringProperty()
-# 	author = ndb.StringProperty()
-# 	id = ndb.StringProperty()
-# 	persons_input = ndb.IntegerProperty()
-# 	bookindex = ndb.IntegerProperty()
-
-
 class HomePage(webapp2.RequestHandler):
 
 	def get(self):
@@ -31,13 +23,6 @@ class HomePage(webapp2.RequestHandler):
 			self.response.write(content.render(active = True))
 		else:
 			self.response.write(content.render(login = True))
-		#
-		# hamlet = Books(
-		# 	title = "hamlet",
-		# 	author = "shakespeare"
-		# )
-		# Macbeth = books()
-		# self.response.write(content.render(title= hamlet.title, author = hamlet.author))
 
 class CssiUser(ndb.Model):
 
@@ -57,7 +42,7 @@ class MainHandler(webapp2.RequestHandler):
 
 		if self.request.cookies.get("logged_in") == "True":
 
-			self.response.write(content.render(success = True, user = user))
+			self.response.write(content.render(success = True, user = self.request.cookies.get("name")))
 		else:
 			self.response.write(content.render(failure = True))
 
@@ -65,11 +50,6 @@ class MainHandler(webapp2.RequestHandler):
  	def post(self):
 		# logged_in = True
 		content = TEMPLATE.get_template('/templates/signup.html')
-	  # user = users.get_current_user()
-	    # if not user:
-	    #   # You shouldn't be able to get here without being logged in
-	    #   self.error(500)
-	    #   return
 	  	cssi_user = CssiUser(
 	       	first_name=self.request.get('firstname'),
 	       	last_name=self.request.get('lastname'),
@@ -77,14 +57,10 @@ class MainHandler(webapp2.RequestHandler):
 		    email = self.request.get('Email'),
 		    password = self.request.get('Password'),
 		    location = self.request.get('location'))
-	  #
-	  # user = cssi_user.all()
-	  # print user
-
-
-
 		cssi_user.put()
 		self.response.set_cookie("logged_in", "True")
+
+		self.response.set_cookie("name", cssi_user.first_name)
 		self.response.write(content.render(success = True, user = cssi_user.first_name))
 
 class LoginHandler(webapp2.RequestHandler):
@@ -106,6 +82,7 @@ class LoginHandler(webapp2.RequestHandler):
 			if (user.username == username and user.password == password) or (user.email == username and user.password == password):
 				# logged_in = True
 				self.response.set_cookie("logged_in", "True")
+				self.response.set_cookie("name", user.first_name)
 				self.response.clear()
 				self.response.write(content.render(success = True, user = user.first_name))
 				return
@@ -148,5 +125,6 @@ app = webapp2.WSGIApplication([
   ('/', HomePage),
   ('/login', MainHandler),
   ('/signIn', LoginHandler),
-  ('/input', UserInput)
+  ('/input', UserInput),
+  ('/books', BookHandler)
 ], debug=True)
