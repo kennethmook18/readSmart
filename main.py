@@ -128,9 +128,15 @@ class BookHandler(webapp2.RequestHandler):
 		# self.response.write(content.render(book.value for all the placeholders))
 
 class UserInput(webapp2.RequestHandler):
-	def get(self):
+	def default(self):
 		content = TEMPLATE.get_template('/templates/UserInput.html')
-		self.response.write(content.render(title = "book variable"))
+		self.response.write(content.render(title = "this book"))
+
+	def get(self):
+		book = self.request.get("id")
+		content = TEMPLATE.get_template('/templates/UserInput.html')
+		self.response.write(content.render(title = "this book"))
+
 		# print "Class is functional"
 
 
@@ -148,5 +154,6 @@ app = webapp2.WSGIApplication([
   ('/', HomePage),
   ('/login', MainHandler),
   ('/signIn', LoginHandler),
-  ('/input', UserInput)
+  ('/input', UserInput),
+  ('/books', BookHandler)
 ], debug=True)
