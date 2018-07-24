@@ -17,6 +17,9 @@ TEMPLATE = jinja2.Environment(
 class HomePage(webapp2.RequestHandler):
 
 	def get(self):
+		books = Books.query().fetch()
+		if len(books) == 0:
+			BookLoader()
 		content = TEMPLATE.get_template('/templates/home.html')
 
 		if self.request.cookies.get("logged_in") == "True":
@@ -96,13 +99,6 @@ class LoginHandler(webapp2.RequestHandler):
 		# ndb.Query()
 		# q.filter("username = ", self.response.get("Username"))
 		# print q
-
-class BookHandler(webapp2.RequestHandler):
-	def get(self):
-		content = TEMPLATE.get_template('/templates/book.html')
-		# create a new html class names Books
-		# have a bunch of {{ placeholders }} and then do
-		# self.response.write(content.render(book.value for all the placeholders))
 
 class UserInput(webapp2.RequestHandler):
 	def get(self):
