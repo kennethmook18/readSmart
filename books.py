@@ -93,57 +93,41 @@ def BookLoader():
 	book = Books(
 		title = "The Giver",
 		author = "Lois Lowry",
-		id = "giver",
+		id = "Giver",
 		persons_input = 0,
 		bookindex = [],
 		publication_date = "1993"
 	)
-	for item in q:
- 		if item.title == book.title:
-			print "Already included"
-		else:
-			book.put()
+	book.put()
 
 	book = Books(
 		title = "Hamlet",
 		author = "William Shakespeare",
-		id = "hamlet",
+		id = "Hamlet",
 		persons_input = 0,
 		bookindex = [],
 		publication_date = "1603"
 	)
-	for item in q:
- 		if item.title == book.title:
-			print "Already included"
-		else:
-			book.put()
+	book.put()
 	book = Books(
 		title = "Fahrenheit 451",
 		author = "Ray Bradbury",
-		id = "451",
+		id = "Fah451",
 		persons_input = 0,
 		bookindex = [],
 		publication_date = "October 1953"
 	)
-	for item in q:
- 		if item.title == book.title:
-			print "Already included"
-		else:
-			book.put()
+	book.put()
 
 	book = Books(
 		title = "Harry Potter and the Sorcerer's Stone",
 		author = "J.K. Rowling",
-		id = "stone",
+		id = "HarryPot",
 		persons_input = 0,
 		bookindex = [],
 		publication_date = "June 26, 1997"
 	)
-	for item in q:
- 		if item.title == book.title:
-			print "Already included"
-		else:
-			book.put()
+	book.put()
 	book = Books(
 		title = "The Hunger Games",
 		author = "Suanne Collins",
