@@ -7,7 +7,6 @@ from google.appengine.ext import ndb
 import logging
 
 
-users = []
 TEMPLATE = jinja2.Environment(
 	loader = jinja2.FileSystemLoader(os.path.dirname(__file__)),
 	extensions = ['jinja2.ext.autoescape'],
@@ -15,9 +14,6 @@ TEMPLATE = jinja2.Environment(
 )
 
 
-logged_in = False
-
-#
 # class Books(ndb.model):
 # 	title = ndb.StringProperty()
 # 	author = ndb.StringProperty()
@@ -29,10 +25,10 @@ logged_in = False
 class HomePage(webapp2.RequestHandler):
 	def get(self):
 		content = TEMPLATE.get_template('/templates/home.html')
-		if logged_in:
-			self.response.write(content.render(active = logged_in))
-		else:
-			self.response.write(content.render(login = True))
+		# if logged_in:
+			# self.response.write(content.render(active = True))
+		# else:
+		self.response.write(content.render(login = True))
 		#
 		# hamlet = Books(
 		# 	title = "hamlet",
@@ -53,30 +49,28 @@ class CssiUser(ndb.Model):
 
 
 class MainHandler(webapp2.RequestHandler):
-  def get(self):
+	def get(self):
     # user = users.get_current_user()
+		content = TEMPLATE.get_template('/templates/signup.html')
 
-    content = TEMPLATE.get_template('/templates/signup.html')
-
-    if logged_in:
-
-		self.response.write(content.render(success = True, user = user))
-    else:
-
+		    # if logged_in:
+			#
+			# 	self.response.write(content.render(success = True, user = user))
+		    # else:
 		self.response.write(content.render(failure = True))
 
 
-  def post(self):
-	  logged_in = True
-	  content = TEMPLATE.get_template('/templates/signup.html')
+ 	def post(self):
+		logged_in = True
+		content = TEMPLATE.get_template('/templates/signup.html')
 	  # user = users.get_current_user()
 	    # if not user:
 	    #   # You shouldn't be able to get here without being logged in
 	    #   self.error(500)
 	    #   return
-	  cssi_user = CssiUser(
-	        first_name=self.request.get('firstname'),
-	        last_name=self.request.get('lastname'),
+	  	cssi_user = CssiUser(
+	       	first_name=self.request.get('firstname'),
+	       	last_name=self.request.get('lastname'),
 			username = self.request.get('Username'),
 		    email = self.request.get('Email'),
 		    password = self.request.get('Password'),
@@ -87,9 +81,9 @@ class MainHandler(webapp2.RequestHandler):
 
 
 
-	  cssi_user.put()
-	  users.append(cssi_user)
-	  self.response.write(content.render(success = True, user = cssi_user.first_name))
+		cssi_user.put()
+		self.response.set_cookie("logged_in", "True")
+		self.response.write(content.render(success = True, user = cssi_user.first_name))
 
 class LoginHandler(webapp2.RequestHandler):
 	def get(self):
@@ -108,12 +102,13 @@ class LoginHandler(webapp2.RequestHandler):
 		for user in q:
 			content = TEMPLATE.get_template('/templates/signup.html')
 			if (user.username == username and user.password == password) or (user.email == username and user.password == password):
-				logged_in = True
+				# logged_in = True
+				self.response.set_cookie("logged_in", "True")
 				self.response.clear()
-				self.response.write(content.render(success = logged_in, user = user.first_name))
+				self.response.write(content.render(success = True, user = user.first_name))
 				return
 			else:
-				logged_in = False
+				self.response.delete_cookie("logged_in")
 
 		if not logged_in:
 			self.response.clear()
