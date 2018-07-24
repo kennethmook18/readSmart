@@ -118,7 +118,7 @@ def BookLoader():
 	)
 	book.put()
 	book = Books(
-		title = "Romeo & Juliet",
+		title = "Romeo and Juliet",
 		author = "William Shakespeare",
 		id = "RomeoJuliet",
 		persons_input = 0,
