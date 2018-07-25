@@ -37,12 +37,13 @@ class BookView(webapp2.RequestHandler):
 		list = [["Person", "Time"]]
 		for number in item.bookindex:
 			print counter
-			average += number
-
+			average = average + number
+			print average
 			list.append(["Person", number])
 			counter +=1
 			if counter == 0:
 				average = 0
+
 			else:
 				average = average/counter
 		self.response.write(content.render(title = item.title, id = item.id, author = item.author, average = average, list = list))
@@ -196,7 +197,7 @@ def BookLoader():
 		author = "William Shakespeare",
 		id = "Hamlet",
 		persons_input = 0,
-		bookindex = [210,240,300,210,330,300,330,300,270,270,330,330, 390,330],
+		bookindex = [210 ,240, 300, 210, 330, 300, 330, 300, 270, 270,330,330, 390,330],
 		publication_date = "1603"
 	)
 	book.put()
