@@ -7,7 +7,7 @@
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
         </head>
-        <body>
+        <body onload="drawChart({{ list }})">
 
               <br>
               <h1> {{ title }} </h1>
@@ -48,7 +48,7 @@
                 <br>
               </form>
 
-              <input type="button" id="chart" name="chart" value="View Chart" onclick="drawChart({{ list }})">
+              <!-- <input type="button" id="chart" name="chart" value="View Chart" onclick="drawChart({{ list }})"> -->
               <div id="chart_div" style="width: 900px; height: 500px;"></div>
               <p><a class="goback" href = "/booklist">Go back</a></p>
 

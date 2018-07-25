@@ -41,11 +41,8 @@ class BookView(webapp2.RequestHandler):
 			print average
 			list.append(["Person", number])
 			counter +=1
-			if counter == 0:
-				average = 0
-
-			else:
-				average = average/counter
+		if counter != 0:
+			average = average/counter
 		self.response.write(content.render(title = item.title, id = item.id, author = item.author, average = average, list = list))
 
 
