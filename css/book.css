@@ -88,16 +88,16 @@ div {
 h1 {
   color: #FFFFFF;
   background-color: #000000;
-  font-size: 5vw;
+  font-size: 3vw;
   padding-top: 3%;
   padding-bottom: 3%;
   text-align: center;
   width: 100%;
   font-family: "Courier New", monospace;
   border-radius: 25px;
-/* Keeps the title as you scroll down the page
+/* Keeps the title as you scroll down the page */
   position: sticky;
-  top: 0px; */
+  top: 0px;
 }
 
 
