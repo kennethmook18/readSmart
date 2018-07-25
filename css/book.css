@@ -66,12 +66,13 @@ div {
   font-size: 20px;
 
 }
+/* Yes and No button options */
 .yesno{
 
-    color: white;
-    background-color: black;
+    color: #FFFFFF;
+    background-color: #000000;
     /* font-size: 2vw; */
-    font-size: 15px;
+    font-size: 20px;
     /* height: 20px; */
     text-align: center;
     margin: 0px;
@@ -83,62 +84,56 @@ div {
     border-radius: 5px;
 }
 
+/* Book Title and bar */
 h1 {
   color: #FFFFFF;
   background-color: #000000;
-  font-size: 5vw;
-  /* height: ; */
-  /* margin: 0px; */
+  font-size: 3vw;
   padding-top: 3%;
   padding-bottom: 3%;
   text-align: center;
   width: 100%;
-  /* font-family: fantasy; */
   font-family: "Courier New", monospace;
   border-radius: 25px;
-  /* word-break: keep-all; */
-  /* justify-content: center;
-  flex: 0 1 240px; */
+/* Keeps the title as you scroll down the page */
+  position: sticky;
+  top: 0px;
 }
 
 
 body {
-  background-color: #4e5868;
+  background-color: #7C7C7C;
+  /* background-color: #4e5868; */
   font-family: 'Ubuntu', sans-serif;
 
 }
 
-head {
+/* head {
   color: #4e5868;
-}
+} */
 
 h2 {
 text-align: center;
 color: white;
 }
 
+
 p {
-  color: white;
+  color: #FFFFFF;
   text-align: center;
 
 
 }
 
-img {
-  border-radius: 10px;
-  height: 75vw;
-  width: 50vw;
+/* Book images */
+.container img {
+  border-radius: 12px;
+  position:
+  float: left;
+  width:  300px;
+  height: auto;
 
-  /* display: block;
-  margin-left: auto;
-  margin-right: auto; */
 }
-/* p2 {
-  color: white;
-  text-align: center;
-  font-family: "Verdana", sans-serif;
-  font-weight: bold;
-} */
 
 h3 .head {
 
@@ -155,12 +150,19 @@ h3 .head {
 
 }
 
+/* Author Style */
+.author {
+  color: white;
+  text-align: center;
+  font-size: 25px;
+}
 
+/* Go Back Button */
 .goback{
   color: white;
   background-color: black;
   /* font-size: 2vw; */
-  font-size: 10px;
+  font-size: 15px;
   /* height: 20px; */
   text-align: center;
   margin: 0px;
@@ -171,8 +173,3 @@ h3 .head {
   width: 100%;
   border-radius: 5px;
 }
-
-/* div {
-  height: 50%;
-  width: 50
-} */
