@@ -77,7 +77,7 @@ class BookHandler(webapp2.RequestHandler):
 
 
 		    <link href="/css/cover.css" rel="stylesheet">
-		    <title>User Input</title>
+		    <title>readSmart</title>
 		    <link rel="shortcut icon" type="image/x-icon" href="/img/logo2.png"/>
 
 		  </head>
