@@ -3,8 +3,85 @@ div {
   display: flex;
   justify-content: center;
 }
+.masthead {
+  margin-bottom: 2rem;
+}
+.cover {
+  padding: 0 1.5rem;
+}
+.cover .btn-lg {
+  padding: .75rem 1.25rem;
+  font-weight: 700;
+}
 
 
+.masthead-brand {
+  margin-bottom: 0;
+  font-family: 'Russo One', sans-serif;
+}
+
+.nav-masthead .nav-link {
+  padding: .25rem 0;
+  font-weight: 700;
+  color: rgba(255, 255, 255, .5);
+  background-color: transparent;
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgba(255, 255, 255, .25);
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+}
+
+.nav-masthead .active {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+#yesnobuttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#userinput{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+  visibility: hidden;
+}
+#get_value{
+  display: flex;
+  flex-direction: row;
+  justify-content:center;
+
+}
+#average{
+  visibility: hidden;
+  text-align: center;
+  font-size: 20px;
+
+}
+.yesno{
+
+    color: white;
+    background-color: black;
+    /* font-size: 2vw; */
+    font-size: 15px;
+    /* height: 20px; */
+    text-align: center;
+    margin: 0px;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 1%;
+    padding-right: 1%;
+    width: 30%;
+    border-radius: 5px;
+}
 
 h1 {
   color: #FFFFFF;
@@ -26,12 +103,13 @@ h1 {
 
 
 body {
-  background-color: #4e5868
+  background-color: #4e5868;
+  font-family: 'Ubuntu', sans-serif;
 
 }
 
 head {
-  color: #4e5868
+  color: #4e5868;
 }
 
 h2 {
@@ -42,7 +120,7 @@ color: white;
 p {
   color: white;
   text-align: center;
-  font-family: "Verdana", sans-serif;
+
 
 }
 
@@ -62,7 +140,7 @@ img {
   font-weight: bold;
 } */
 
-p3 {
+h3 .head {
 
   color: #FFFFFF;
   background-color: #000000;
@@ -78,7 +156,7 @@ p3 {
 }
 
 
-a {
+.goback{
   color: white;
   background-color: black;
   /* font-size: 2vw; */
