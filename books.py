@@ -88,7 +88,6 @@ class BookHandler(webapp2.RequestHandler):
 		          <nav class="nav nav-masthead justify-content-center">
 		            <a class="nav-link" href="/">Home</a>
 		            <a class="nav-link active" href="/booklist">Books</a>
-		            <a class="nav-link" href="#">Items</a>
 					<a class="nav-link" href = "/logout">Logout</a>
 
 		          </nav>
