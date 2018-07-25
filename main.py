@@ -96,7 +96,7 @@ class LoginHandler(webapp2.RequestHandler):
 			content = TEMPLATE.get_template('/templates/signIn.html')
 			self.response.write(content.render(start = True, error = True, Username = username, Password = password))
 		else:
-			self.redirect("/")
+			self.redirect("/login")
 
 		# ndb.Query()
 		# q.filter("username = ", self.response.get("Username"))
