@@ -4,6 +4,7 @@
         <link href="https://fonts.googleapis.com/css?family=Orbitron|Russo+One" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <!-- <link href="/css/bootstrap.min.css" rel="stylesheet"> -->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
         </head>
         <body>
@@ -47,6 +48,8 @@
                 <br>
               </form>
 
+              <input type="button" id="chart" name="chart" value="View Chart" onclick="drawChart({{ list }})">
+              <div id="chart_div" style="width: 900px; height: 500px;"></div>
               <p><a class="goback" href = "/booklist">Go back</a></p>
 
 
@@ -60,6 +63,7 @@
               <script type="text/javascript">
               const yes = document.querySelector('#yes');
               const no = document.querySelector('#no');
+              // const chart = document.querySelector("#chart");
 
               yes.addEventListener('click', () =>{
                 console.log("i've been clicked")
@@ -77,10 +81,21 @@
                 document.querySelector("#average").style.visibility = "visible";
 
                 document.querySelector("#averageset").style.visibility = "hidden";
-
-
               });
 
+
+              google.charts.load("current", {packages:["corechart"]});
+              google.charts.setOnLoadCallback(drawChart);
+              function drawChart(list) {
+                var data = google.visualization.arrayToDataTable(list);
+                var options = {
+                  title: 'Lengths of dinosaurs, in meters',
+                  legend: { position: 'none' },
+                };
+
+                var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+                chart.draw(data, options);
+              }
               </script>
               <!-- <script type="text/javascript" src="/javascript/buttons.js"></script> -->
 
