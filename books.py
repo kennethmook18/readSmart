@@ -121,7 +121,7 @@ def BookLoader():
 		author = "William Golding",
 		id = "lordflies",
 		persons_input = 0,
-		bookindex = [],
+		bookindex = [180,180,120,180,210,240,240,180,240,270,240,180,270,270,240,270,210,270,300,300,180],
 		publication_date = "September 17, 1954"
 	)
 	book.put()
@@ -130,7 +130,7 @@ def BookLoader():
 		author = "F. Scott Fitzgerald",
 		id = "GreatGatsby",
 		persons_input = 0,
-		bookindex = [],
+		bookindex = [180,210,120,150,180,90,180,180,150,270,120,180,120,240,300,180,120],
 		publication_date = "April 10, 1925"
 	)
 	book.put()
@@ -140,7 +140,7 @@ def BookLoader():
 		author = "Harper Lee",
 		id = "KillMock",
 		persons_input = 0,
-		bookindex = [],
+		bookindex = [390,240,240,330,300,360,240,360,390,330,270,420,240,390],
 		publication_date = "July 11, 1960"
 	)
 	book.put()
@@ -149,7 +149,7 @@ def BookLoader():
 		author = "William Shakespeare",
 		id = "RomeoJuliet",
 		persons_input = 0,
-		bookindex = [],
+		bookindex = [390,420,240,240,300,240,330,300,300,240,330,180,300,300,300,300,420,240,300,420,270],
 		publication_date = "1597"
 	)
 	book.put()
@@ -158,7 +158,7 @@ def BookLoader():
 		author = "William Shakespeare",
 		id = "Macbeth",
 		persons_input = 0,
-		bookindex = [],
+		bookindex = [300,150,210,270,150,270,240,180,210,210,240,180,270,360],
 		publication_date = "1606"
 	)
 	book.put()
