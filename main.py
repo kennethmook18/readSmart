@@ -68,37 +68,48 @@ class MainHandler(webapp2.RequestHandler):
 
 class LoginHandler(webapp2.RequestHandler):
 	def get(self):
-	  	content = TEMPLATE.get_template('/templates/signIn.html')
-		self.response.write(content.render(start = True))
+		content = TEMPLATE.get_template('/templates/signIn.html')
+		self.response.write(content.render(start = True, error=False))
 
 	def post(self):
 		username = self.request.get("Username")
 		password = self.request.get("Password")
-		content = TEMPLATE.get_template('/templates/signIn.html')
+		#content = TEMPLATE.get_template('/templates/signup.html')
 
-		self.response.write(content.render(start = False))
 		# user_key =  CssiUser.all()
-
+		user_signed_in = False
 		q = CssiUser.query().fetch()
 		for user in q:
-			content = TEMPLATE.get_template('/templates/signup.html')
 			if (user.username == username and user.password == password) or (user.email == username and user.password == password):
 				# logged_in = True
 				self.response.set_cookie("logged_in", "True")
 				self.response.set_cookie("name", user.first_name)
 				self.response.clear()
-				self.response.write(content.render(success = True, user = user.first_name))
-				return
-			else:
+				user_signed_in = True
+				break
+				# self.response.write(content.render(success = True, user = user.first_name))
+				# return
+			if user.username != username or user.password != password or user.email != username:
+				user_signed_in = False
 				self.response.delete_cookie("logged_in")
 
-		if self.request.cookies.get("logged_in") == "":
-			self.response.clear()
+		if not user_signed_in:
 			content = TEMPLATE.get_template('/templates/signIn.html')
 			self.response.write(content.render(start = True, error = True, Username = username, Password = password))
+		else:
+			self.redirect("/")
+
 		# ndb.Query()
 		# q.filter("username = ", self.response.get("Username"))
 		# print q
+
+class LogoutHandler(webapp2.RequestHandler):
+	def get(self):
+		self.response.delete_cookie("logged_in")
+		self.redirect('/')
+
+
+
 
 class UserInput(webapp2.RequestHandler):
 	def get(self):
@@ -116,156 +127,12 @@ def average(persons_input, title):
 			book_length = int(book_length)
 			b.bookindex.append(book_length)
 
-# class LordFlies(webapp2.RequestHandler):
-#     def get(self):
-#         content = TEMPLATE.get_template('/templates/book.html')
-#         params = {
-#             'title': "Lord of the Flies",
-#             'author': "William Golding",
-#             'synopsis': "Synopsis goes here",
-#             'image': "lordflies.jpeg",
-#         }
-#         self.response.write(content.render(params))
-#
-# class GreatGatsby(webapp2.RequestHandler):
-#     def get(self):
-#         content = TEMPLATE.get_template('/templates/book.html')
-#         params = {
-#             'title': "The Great Gatsby",
-#             'author': "F. Scott Fitzgerald",
-#             'synopsis': "Synopsis goes here",
-#             'image' : "GreatGatsby.jpeg",
-#         }
-#         self.response.write(content.render(params))
-#
-# class KillMockBird(webapp2.RequestHandler):
-#     def get(self):
-#         content = TEMPLATE.get_template('/templates/book.html')
-#         params = {
-#             'title': "To Kill a Mockingbird",
-#             'author': "Harper Lee",
-#             'synopsis': "Synopsis goes here",
-#             'image':"KillMock.jpg",
-#         }
-#         self.response.write(content.render(params))
-#
-# class RomeoJuliet(webapp2.RequestHandler):
-#     def get(self):
-#         content = TEMPLATE.get_template('/templates/book.html')
-#         params = {
-#             'title': "Romeo & Juliet",
-#             'author': "William Shakespeare",
-#             'synopsis': "Synopsis goes here",
-#             'image':"RomeoJuliet.jpg",
-#         }
-#         self.response.write(content.render(params))
-#
-# class Macbeth(webapp2.RequestHandler):
-#     def get(self):
-#             content = TEMPLATE.get_template('/templates/book.html')
-#             params = {
-#                 'title': "Macbeth",
-#                 'author': "William Shakespeare",
-#                 'synopsis': "Synopsis goes here",
-#                 'image':"Macbeth.jpg",
-#             }
-#             self.response.write(content.render(params))
-#
-# class HuckFinn(webapp2.RequestHandler):
-#     def get(self):
-#             content = TEMPLATE.get_template('/templates/book.html')
-#             params = {
-#                 'title': "The Adventures of Huckleberry Finn",
-#                 'author': "Mark Twain",
-#                 'synopsis': "Synopsis goes here",
-#                 'images': "HuckFinn.jpg",
-#             }
-#             self.response.write(content.render(params))
-#
-# class Giver(webapp2.RequestHandler):
-#     def get(self):
-#             content = TEMPLATE.get_template('/templates/book.html')
-#             params = {
-#                 'title': "The Giver",
-#                 'author': "Lois Lowry",
-#                 'synopsis': "Synopsis goes here",
-#                 'images': "Giver.jpg",
-#             }
-#             self.response.write(content.render(params))
-#
-# class Hamlet(webapp2.RequestHandler):
-#     def get(self):
-#             content = TEMPLATE.get_template('/templates/book.html')
-#             params = {
-#                 'title': "Hamlet",
-#                 'author': "William Shakespeare",
-#                 'synopsis': "Synopsis goes here",
-#                 'id': "Hamlet",
-#             }
-#             self.response.write(content.render(params))
-#
-# class Fahrenheit(webapp2.RequestHandler):
-#     def get(self):
-#             content = TEMPLATE.get_template('/templates/book.html')
-#             params = {
-#                 'title': "Fahrenheit 451",
-#                 'author': "Ray Bradbury",
-#                 'synopsis': "Synopsis goes here",
-#                 'image': "Fah451.jpg",
-#             }
-#             self.response.write(content.render(params))
-#
-# class HarryPotter(webapp2.RequestHandler):
-#     def get(self):
-#             content = TEMPLATE.get_template('/templates/book.html')
-#             params = {
-#                 'title': "Harry Potter and the Sorcerer's Stone",
-#                 'author': "J.K. Rowling",
-#                 'synopsis': "Synopsis goes here",
-#                 'image': "HarryPot.jpg",
-#             }
-#             self.response.write(content.render(params))
-#
-# class HungerGames(webapp2.RequestHandler):
-#     def get(self):
-#             content = TEMPLATE.get_template('/templates/book.html')
-#             params = {
-#                 'title': "The Hunger Games",
-#                 'author': "Suzanne Collins",
-#                 'synopsis': "Synopsis goes here",
-#                 'id': "Hunger",
-#             }
-#             self.response.write(content.render(params))
-#
-# class Narnia(webapp2.RequestHandler):
-#     def get(self):
-#             content = TEMPLATE.get_template('/templates/book.html')
-#             params = {
-#                 'title': "The Lion, the Witch, and the Wardrobe",
-#                 'author': "C.S. Lewis",
-#                 'synopsis': "Synopsis goes here",
-#                 'image': "Narnia.jpg",
-#             }
-#             self.response.write(content.render(params))
-#
-
 app = webapp2.WSGIApplication([
   ('/', HomePage),
   ('/login', MainHandler),
+  ('/logout', LogoutHandler),
   ('/signIn', LoginHandler),
   ('/input', UserInput),
   ('/booklist', BookHandler),
   ('/bookview', BookView)
-      # ('/lordoftheflies', LordFlies),
-      # ('/greatgatsby', GreatGatsby),
-      # ('/tokillamockingbird', KillMockBird),
-      # ('/romeo&juliet', RomeoJuliet),
-      # ('/macbeth', Macbeth),
-      # ('/huckleberryfinn', HuckFinn),
-      # ('/thegiver', Giver),
-      # ('/hamlet', Hamlet),
-      # ('/fahrenheit451', Fahrenheit),
-      # ('/sorcererstone', HarryPotter),
-      # ('/hungergames', HungerGames),
-      # ('/lionwitchwardrobe', Narnia),
 ], debug=True)

@@ -54,6 +54,8 @@ class BookHandler(webapp2.RequestHandler):
 		            <a class="nav-link" href="/">Home</a>
 		            <a class="nav-link active" href="/booklist">Books</a>
 		            <a class="nav-link" href="#">Items</a>
+					<a class="nav-link" href = "/logout">Logout</a>
+
 		          </nav>
 		        </div>
 		      </header>
@@ -118,7 +120,7 @@ def BookLoader():
 	)
 	book.put()
 	book = Books(
-		title = "Romeo & Juliet",
+		title = "Romeo and Juliet",
 		author = "William Shakespeare",
 		id = "RomeoJuliet",
 		persons_input = 0,
