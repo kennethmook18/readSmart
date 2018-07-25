@@ -22,6 +22,41 @@ class Books(ndb.Model):
 	bookindex = ndb.IntegerProperty(repeated = True)
 	publication_date = ndb.StringProperty()
 
+
+class BookView(webapp2.RequestHandler):
+	def get(self):
+		content = TEMPLATE.get_template('/templates/books.html')
+		name = self.request.get("title")
+		item = Books.query().filter(Books.title == name).get()
+
+		average = 0
+		counter = 0
+		for number in item.bookindex:
+			print counter
+			average += number
+			counter +=1
+		average = average/counter
+		self.response.write(content.render(title = item.title, id = item.id, author = item.author, average = average))
+
+
+	def post(self):
+		content = TEMPLATE.get_template('/templates/books.html')
+		name = self.request.get("title")
+		item = Books.query().filter(Books.title == name).get()
+
+		item.bookindex.append(int(self.request.get("time")))
+		average = 0
+		counter = 0
+		for number in item.bookindex:
+			print counter
+			average += number
+			counter +=1
+		average = average/counter
+		item.put()
+		self.response.write(content.render(title = item.title, id = item.id, author = item.author, average = average, averageSet = True))
+		return
+
+
 class BookHandler(webapp2.RequestHandler):
 	def get(self):
 		content = TEMPLATE.get_template('/templates/book.html')
@@ -72,22 +107,10 @@ class BookHandler(webapp2.RequestHandler):
   			</footer>
 		""")
 
-class BookView(webapp2.RequestHandler):
-	def get(self):
-		content = TEMPLATE.get_template('/templates/books.html')
-		name = self.request.get("title")
-		q = Books.query().fetch()
-		for item in q:
-			if name == item.title:
-				self.response.write(content.render(title = item.title, id = item.id, author = item.author))
-				return
-
-
 
 
 def BookLoader():
 	q = Books.query().fetch()
-
 
 	book = Books(
 		title = "Lord of the Flies",

@@ -1,21 +1,100 @@
 <html>
-        <!-- <head> -->
+        <head>
         <link rel="stylesheet" type="text/css" href="css/book.css">
+        <link href="https://fonts.googleapis.com/css?family=Orbitron|Russo+One" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+        <!-- <link href="/css/bootstrap.min.css" rel="stylesheet"> -->
 
-          <!-- <br>
-            <a href= "/"> Go back to Homepage</a>
-          <br>
-        </head> -->
+        </head>
         <body>
+          <!-- <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+            <header class="masthead mb-auto">
+              <div class="inner">
+
+                <h3 class="masthead-brand"> <a href="/">readSmart<a></h3>
+                <nav class="nav nav-masthead justify-content-center">
+                  <a class="nav-link active" href="/">Home</a>
+                  <a class="nav-link" href="/booklist">Books</a>
+                  <a class="nav-link" href="#">Items</a>
+                  <a class="nav-link" href="/">Logout</a>
+                </nav>
+              </div>
+            </header>
+        </div> -->
               <br>
               <h1> {{ title }} </h1>
               <br>
+
+
               <center><img src="/img/{{ id }}.jpg" alt="{{ title }} Cover"></center>
               <br>
               <p> {{ author }} </p>
               <br>
-              <p><a href = "/booklist">Go back</a></p>
-              
+
+              <div id="averageset">
+              {% if averageSet %}
+
+                <p>On average, it takes users <strong>{{ average }}</strong> minutes to read this book</p>
+
+              {% endif %}
+            </div>
+              <div id="average">
+                <p>On average, it takes users <strong>{{ average }}</strong> minutes to read this book</p>
+              </div>
+              <form id = "yesnobuttons">
+
+                <p>Have you read this book before?</p>
+                <input class="yesno" type="button" id="yes"name="yes" value="Yes">
+                <input class="yesno" type="button" id="no"name="no" value="No">
+              </form>
+
+              <form id ="userinput" action = "/bookview?title={{ title }}" method = "post">
+
+                <label for="time" >How long did it take you to read {{ title }}?</label> <br/>
+                <div id = "get_value">
+                  <input class="form-control" type="number" name = "time" placeholder="In minutes"/>
+                  <input class="btn btn-primary" type="submit" value="Submit">
+                </div>
+                <br>
+              </form>
+
+              <p><a class="goback" href = "/booklist">Go back</a></p>
+
+
+
+              <footer class="mastfoot mt-auto">
+                <div class="inner">
+                  <p>readSmart&copy; Federick Gonzalez, Casey Mook, and Jaylen Patterson</p>
+
+                </div>
+              </footer>
+              <script type="text/javascript">
+              const yes = document.querySelector('#yes');
+              const no = document.querySelector('#no');
+
+              yes.addEventListener('click', () =>{
+                console.log("i've been clicked")
+                document.querySelector("#yesnobuttons").style.visibility = "hidden";
+                document.querySelector("#userinput").style.visibility = "visible";
+                document.querySelector("#average").style.visibility = "visible";
+
+                document.querySelector("#averageset").style.visibility = "hidden";
+
+              });
+              no.addEventListener('click', () =>{
+                console.log("i've been clicked")
+                document.querySelector("#yesnobuttons").style.visibility = "hidden";
+                document.querySelector("#userinput").style.visibility = "hidden";
+                document.querySelector("#average").style.visibility = "visible";
+
+                document.querySelector("#averageset").style.visibility = "hidden";
+
+
+              });
+
+              </script>
+              <!-- <script type="text/javascript" src="/javascript/buttons.js"></script> -->
+
               <!-- <p> {{ synopsis }}</p> -->
         </body>
 </html>
