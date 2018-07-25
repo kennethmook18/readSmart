@@ -35,7 +35,10 @@ class BookView(webapp2.RequestHandler):
 			print counter
 			average += number
 			counter +=1
-		average = average/counter
+			if counter == 0:
+				average = 0
+			else:
+				average = average/counter
 		self.response.write(content.render(title = item.title, id = item.id, author = item.author, average = average))
 
 
