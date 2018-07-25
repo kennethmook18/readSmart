@@ -23,6 +23,10 @@ class Books(ndb.Model):
 	publication_date = ndb.StringProperty()
 
 
+class PersonalLibrary(webapp2.RequestHandler):
+	def get(self):
+		content = TEMPLATE.get_template('/tempates/library.html')
+
 class BookView(webapp2.RequestHandler):
 	def get(self):
 		content = TEMPLATE.get_template('/templates/books.html')
@@ -77,7 +81,7 @@ class BookHandler(webapp2.RequestHandler):
 
 
 		    <link href="/css/cover.css" rel="stylesheet">
-		    <title>User Input</title>
+		    <title>readSmart</title>
 		    <link rel="shortcut icon" type="image/x-icon" href="/img/logo2.png"/>
 
 		  </head>

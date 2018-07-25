@@ -62,7 +62,6 @@ class MainHandler(webapp2.RequestHandler):
 		    location = self.request.get('location'))
 		cssi_user.put()
 		self.response.set_cookie("logged_in", "True")
-
 		self.response.set_cookie("name", cssi_user.first_name)
 		self.response.write(content.render(success = True, user = cssi_user.first_name))
 
@@ -134,5 +133,6 @@ app = webapp2.WSGIApplication([
   ('/signIn', LoginHandler),
   ('/input', UserInput),
   ('/booklist', BookHandler),
-  ('/bookview', BookView)
+  ('/bookview', BookView),
+  ('/library', PersonalLibrary)
 ], debug=True)
