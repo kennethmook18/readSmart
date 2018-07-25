@@ -85,11 +85,12 @@
 
 
               google.charts.load("current", {packages:["corechart"]});
-              google.charts.setOnLoadCallback(drawChart);
+              // google.charts.setOnLoadCallback(drawChart);
               function drawChart(list) {
+                console.log("Drawing chart")
                 var data = google.visualization.arrayToDataTable(list);
                 var options = {
-                  title: 'Lengths of dinosaurs, in meters',
+                  title: 'Time taken to read',
                   legend: { position: 'none' },
                 };
 
