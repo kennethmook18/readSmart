@@ -86,12 +86,14 @@
 
               google.charts.load("current", {packages:["corechart"]});
               // google.charts.setOnLoadCallback(drawChart);
-              function drawChart(list) {
+              function drawChart(list, name) {
                 console.log("Drawing chart")
                 var data = google.visualization.arrayToDataTable(list);
                 var options = {
-                  title: 'Time taken to read',
+                  title: 'Times taken to read book by user',
                   legend: { position: 'none' },
+                   vAxis: {title : "Number of users"},
+                   hAxis: {title : "Time taken to read book"}
                 };
 
                 var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
