@@ -14,7 +14,11 @@ div {
   font-weight: 700;
 }
 
-
+#book_text_box{
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
 .masthead-brand {
   margin-bottom: 0;
   font-family: 'Russo One', sans-serif;
@@ -41,7 +45,17 @@ div {
   color: #fff;
   border-bottom-color: #fff;
 }
-
+/* Add this to my library  */
+.addButton {
+  color: #FFFFFF;
+  background-color: #000000;
+  border-radius: 5px;
+  border-color: #FFFFFF;
+  border-width: 2px;
+  font-size: 15px;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
 #chart_div{
    margin: auto;
    width: 50%;
@@ -163,8 +177,13 @@ h3 .head {
 
 }
 /* Have you read this book before? Style */
-.question {
+.question1 {
   color: #FFFFFF;
+  font-size: 20px;
+}
+/* How long did it take you to read style */
+.question2 {
+  color: #000000;
   font-size: 20px;
 }
 /* Author Style */
@@ -177,9 +196,9 @@ h3 .head {
 /* Go Back Button */
 .goback{
   color: white;
-  background-color: black;
+  background-color: #000000;
   /* font-size: 2vw; */
-  font-size: 15px;
+  font-size: 20px;
   /* height: 20px; */
   text-align: center;
   margin: 0px;

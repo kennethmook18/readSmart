@@ -5,41 +5,108 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Orbitron|Russo+One" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
-
-
     <link href="/css/cover.css" rel="stylesheet">
     <title>User Input</title>
     <link rel="shortcut icon" type="image/x-icon" href="/img/logo2.png"/>
-
   </head>
 
-  <body>
+  <body onload="hide('hidden_text')">
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
       <header class="masthead mb-auto">
         <div class="inner">
 
           <h3 class="masthead-brand"> <a href="/">readSmart<a></h3>
           <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link active" href="/">Home</a>
+            <a class="nav-link active" href="/login">Home</a>
             <a class="nav-link" href = "/booklist">Books</a>
+            <a class="nav-link" href = "/library">Library</a>
             <a class="nav-link" href = "/logout">Logout</a>
           </nav>
         </div>
       </header>
+      <img src="/img/logo.png" alt="Logo">
 
-      <!-- <main role="main" class="inner cover"> -->
-        <img src="/img/logo.png" alt="Logo">
-          <label for="time" >How long did it take you to read {{ title }}?</label> <br/>
-          <input class="form-control" type="number" name = "time" placeholder="In minutes"/>
-          <input class="btn btn-primary" type="submit" value="Submit">
+      <form data-toggle="validator" id = "login_form" action="/login" method="post">
+        <div class="form-group valid-form">
+          <input type="text" class="form-control" id="bookTitle" name="bookTitle" placeholder="Book Title" required="">
+        </div>
 
-        </form>
-          <footer class="mastfoot mt-auto">
-            <div class="inner">
-              <p>readSmart&copy; Federick Gonzalez, Casey Mook, and Jaylen Patterson</p>
+        <div class="form-group valid-form">
+          <input type="text" class="form-control" id="authorName" name="authorName" placeholder="Author Name" required="">
+        </div>
+        <div class="form-group valid-form">
+          <input type="file" class="form-control" id="imageFile" name="imageFile" required="">
+        </div>
+        <div class="form-group valid-form">
+          <input type="textarea" class="form-control" id="synopsis" name="synopsis" placeholder="Synopsis" required="" style="height:100px;">
+        </div>
 
-            </div>
-          </footer>
+        <div id="hidden_text">
+          <p>In the synopsis, write a short summary of the book that you plan on adding</p>
+        </div>
+
+
+        <script type="text/javascript">
+          const syn = document.getElementById("synopsis");
+          syn.addEventListener("mouseover", ()=>{
+          console.log("Mouse has entered")
+          show("hidden_text")
+          });
+          syn.addEventListener("mouseout", ()=>{
+          console.log("Mouse has left")
+          hide("hidden_text")
+          });
+          /*
+          Show the HTML element specified by the ID.  You can use this to make an HTML
+          element visible and optionally set its position relative to another element.
+          The arguments are:
+          = id - the ID of the HTML element to show.
+          = relativeTo (optional) - the element to position the other element near.
+          */
+          function show(id, relativeTo, minX, maxX, yOffset, scroll) {
+            setStyle(id, 'display', 'block');
+            if (relativeTo) {
+              setPositionRelativeTo(id, relativeTo, minX, maxX, yOffset, scroll);
+            }
+          }
+          /*
+          Hide the specified HTML element.
+          The arguments are:
+          = id - the HTML element ID to hide.
+          */
+          function hide(id) {
+            setStyle(id, 'display', 'none');
+          }
+          /*
+          Set a style attribute for a specified HTML element.
+          The arguments are:
+          = id - the ID of the HTML element to set.
+          = attribute - the style attribute to modify.
+          = value - the new value for the style attribute.
+          */
+          function setStyle(id, attribute, value) {
+            var tag = document.getElementById(id);
+            if (tag) {
+              tag.style[attribute] = value;
+            }
+          }
+
+
+        </script>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+
+      </form>
+
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p>readSmart&copy; Federick Gonzalez, Casey Mook, and Jaylen Patterson</p>
+
+        </div>
+      </footer>
+
   </div>
 
   </body>

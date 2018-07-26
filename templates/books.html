@@ -16,19 +16,19 @@
               <left><img src="/img/{{ id }}.jpg" alt="{{ title }} Cover"></left>
 
               </div>
+              <br>
+              <p class="author"> {{ author }} </p>
+              <p class="synopsis"> {{ synopsis }} </p>
+
               <form id="library_button" action="/library" method="post">
-                  <input type="text" name="book" style="visibility:hidden" value="{{ title }}">
-                  <!-- <script>
-                    console.log(document.getElementById('book').value)
-                  </script> -->
+                  <input type="text" name="book" id="book_text_box" value="{{ title }}">
                   <br>
-                  <input type="submit" id="add" value="Add this to my library">
+                  <br>
+                  <center><input class= "addButton" type="submit" id="add" value="Add this book to my library"></center>
 
               </form>
 
-              <br>
-              <p class="author"> {{ author }} </p>
-              <br>
+
 
               <div id="averageset">
               {% if averageSet %}
@@ -42,16 +42,16 @@
               </div>
               <form id = "yesnobuttons">
 
-                <p class = "question">Have you read this book before?</p>
+                <p class = "question1">Have you read this book before?</p>
                 <input class="yesno" type="button" id="yes"name="yes" value="Yes">
                 <input class="yesno" type="button" id="no"name="no" value="No">
               </form>
 
               <form id ="userinput" action = "/bookview?title={{ title }}" method = "post">
 
-                <label for="time" >How long did it take you to read {{ title }}?</label> <br/>
+                <label class="question2" for="time" >How long did it take you to read {{ title }}?</label> <br/>
                 <div id = "get_value">
-                  <input class="form-control" type="number" name = "time" placeholder="In minutes"/>
+                  <input class="form-control" type="number" min="0" max="{{ Max }}" name = "time" placeholder="In minutes"/>
                   <input class="btn btn-primary" type="submit" value="Submit">
                 </div>
                 <br>
@@ -111,6 +111,6 @@
               </script>
               <!-- <script type="text/javascript" src="/javascript/buttons.js"></script> -->
 
-              <!-- <p> {{ synopsis }}</p> -->
+              <!-- <p> </p> -->
         </body>
 </html>

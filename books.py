@@ -21,15 +21,17 @@ class Books(ndb.Model):
 	persons_input = ndb.IntegerProperty()
 	bookindex = ndb.IntegerProperty(repeated = True)
 	publication_date = ndb.StringProperty()
+	book_picture = ndb.BlobProperty()
 
+class AddBookHandler(webapp2.RequestHandler):
+	def get(self):
+		content = TEMPLATE.get_template('templates/UserInput.html')
+		self.response.write(content.render())
+	def post(self):
+		book = Books(
 
-# class PersonalLibrary(webapp2.RequestHandler):
-# 	def get(self):
-# 		content = TEMPLATE.get_template('/templates/library.html')
-# 		user = self.request.cookies.get("name")
-# 		q = CssiUser.query().filter("first_name" == user).fetch()
-# 		self.response.write(q.first_name+ " " + q.last_name)
-# 		self.response.write(content.render())
+		)
+		book.put()
 
 class BookView(webapp2.RequestHandler):
 	def get(self):
@@ -119,6 +121,9 @@ class BookHandler(webapp2.RequestHandler):
 		for item in q:
 			self.response.write(content.render(title = item.title, id = item.id, author = item.author))
 		self.response.write("""
+				<form action="/addBooks">
+					<input type = "submit" value = "Add a new Book">
+				</form>
 			</div>
 			<footer class="mastfoot mt-auto">
 			<div class="inner">
@@ -139,7 +144,8 @@ def BookLoader():
 		id = "lordflies",
 		persons_input = 0,
 		bookindex = [180,230,120,180,210,240,240,180,240,270,240,180,270,270,240,270,210,270,300,300,180,160,330,230,120,360,140],
-		publication_date = "September 17, 1954"
+		publication_date = "September 17, 1954",
+		book_picture = ""
 	)
 	book.put()
 	book = Books(
@@ -148,7 +154,8 @@ def BookLoader():
 		id = "GreatGatsby",
 		persons_input = 0,
 		bookindex = [180,210,120,150,180,90,180,180,150,270,120,180,120,240,300,180,120,90,230,230,110,130,120,140,160,140,150,70,80,100,110,90,220,230,210,70,80,80],
-		publication_date = "April 10, 1925"
+		publication_date = "April 10, 1925",
+		book_picture = ""
 	)
 	book.put()
 
@@ -158,7 +165,8 @@ def BookLoader():
 		id = "KillMock",
 		persons_input = 0,
 		bookindex = [390,260,270,330,300,360,240,360,390,330,270,420,390,260,290,280,300,310,300,340,350,330,340,370,350,360,340,350,320,330,310,360,330,320,330],
-		publication_date = "July 11, 1960"
+		publication_date = "July 11, 1960",
+		book_picture = ""
 	)
 	book.put()
 	book = Books(
@@ -167,7 +175,8 @@ def BookLoader():
 		id = "RomeoJuliet",
 		persons_input = 0,
 		bookindex = [360,420,240,240,300,240,270,300,300,240,330,180,300,300,300,280,370,240,300,420,270,160,150,260,270,280,290,270,260,360,350],
-		publication_date = "1597"
+		publication_date = "1597",
+		book_picture = ""
 	)
 	book.put()
 	book = Books(
@@ -176,7 +185,8 @@ def BookLoader():
 		id = "Macbeth",
 		persons_input = 0,
 		bookindex = [300,150,210,270,150,270,240,180,210,210,240,180,270,360,200,200,200,200,120,160,170,180,190,260,270,140,130,310,320,120,120,130,90,200,190],
-		publication_date = "1606"
+		publication_date = "1606",
+		book_picture = ""
 	)
 	book.put()
 
@@ -186,7 +196,8 @@ def BookLoader():
 		id = "HuckFinn",
 		persons_input = 0,
 		bookindex = [120,120,180,210,210,180,300,210,180,270,150,160,170,180,150,160,170,210,220,180,190,200,200,210,280,270,260,110,100,110,115,270,260,330,140,130],
-		publication_date = "December 10, 1884"
+		publication_date = "December 10, 1884",
+		book_picture = ""
 	)
 	book.put()
 	book = Books(
@@ -195,7 +206,8 @@ def BookLoader():
 		id = "Giver",
 		persons_input = 0,
 		bookindex = [90,120,180,210,180,150,240,120,120,170,180,210,270,240,170,240,90,120,150,130,90,200,200,210,140,250,200,200,220,220,160,170,160,170,190,190,160,160,80],
-		publication_date = "1993"
+		publication_date = "1993",
+		book_picture = ""
 	)
 	book.put()
 
@@ -205,7 +217,8 @@ def BookLoader():
 		id = "Hamlet",
 		persons_input = 0,
 		bookindex = [200, 250,260,270, 300, 210, 330, 300, 330, 300, 270, 270,330,330, 390,330,290,290,280,300,290,330,320,280,270,250,240,230,220,210,200,350,310,370,380,400,270,280,290,290,290,290,290,320,320,250,240,240,230,370,380],
-		publication_date = "1603"
+		publication_date = "1603",
+		book_picture = ""
 	)
 	book.put()
 	book = Books(
@@ -214,7 +227,8 @@ def BookLoader():
 		id = "Fah451",
 		persons_input = 0,
 		bookindex = [150,210,240,150,240,270,180,150,240,180,330,220,200,190,180,230,240,210,260,250,290,180,190,200,180,120,110,210,220,220,300],
-		publication_date = "October 1953"
+		publication_date = "October 1953",
+		book_picture = ""
 	)
 	book.put()
 
@@ -224,7 +238,8 @@ def BookLoader():
 		id = "HarryPot",
 		persons_input = 0,
 		bookindex = [210,180,270,300,180,300,180,330,240,300,390,360,270,260,240,250,280,140,410,230,280,270,260,250,240,230,300],
-		publication_date = "June 26, 1997"
+		publication_date = "June 26, 1997",
+		book_picture = ""
 	)
 	book.put()
 	book = Books(
@@ -233,7 +248,8 @@ def BookLoader():
 		id = "Hunger",
 		persons_input = 0,
 		bookindex = [270,270,240,330,300,300,240,360,390,300,360,310,330,330,360,360,270,360,350,340,330,320,310,290,280,400,260,350,320,330,430,330,390],
-		publication_date = "September 14, 2008"
+		publication_date = "September 14, 2008",
+		book_picture = ""
 	)
 	book.put()
 
@@ -243,6 +259,7 @@ def BookLoader():
 		id = "Narnia",
 		persons_input = 0,
 		bookindex = [270,150,180,210,120,210,180,150,300,150,240,150,160,170,180,190,200,210,220,230,240,250,260,270,180,170,160,150,140,130,120,130,160,150,170,180,190,80,90,130,140,130,130],
-		publication_date = "October 16, 1950"
+		publication_date = "October 16, 1950",
+		book_picture = ""
 	)
 	book.put()
