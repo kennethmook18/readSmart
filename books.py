@@ -22,14 +22,10 @@ class Books(ndb.Model):
 	bookindex = ndb.IntegerProperty(repeated = True)
 	publication_date = ndb.StringProperty()
 
-
-# class PersonalLibrary(webapp2.RequestHandler):
-# 	def get(self):
-# 		content = TEMPLATE.get_template('/templates/library.html')
-# 		user = self.request.cookies.get("name")
-# 		q = CssiUser.query().filter("first_name" == user).fetch()
-# 		self.response.write(q.first_name+ " " + q.last_name)
-# 		self.response.write(content.render())
+class AddBookHandler(webapp2.RequestHandler):
+	def get(self):
+		content = TEMPLATE.get_template('templates/UserInput.html')
+		self.response.write(content.render())
 
 class BookView(webapp2.RequestHandler):
 	def get(self):
@@ -114,6 +110,9 @@ class BookHandler(webapp2.RequestHandler):
 		for item in q:
 			self.response.write(content.render(title = item.title, id = item.id, author = item.author))
 		self.response.write("""
+				<form action="/addBooks">
+					<input type = "submit" value = "Add a new Book">
+				</form>
 			</div>
 			<footer class="mastfoot mt-auto">
 			<div class="inner">
