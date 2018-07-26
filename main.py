@@ -67,12 +67,13 @@ class PersonalLibrary(webapp2.RequestHandler):
 		      <header class="masthead mb-auto">
 		        <div class="inner">
 
-		          <h3 class="masthead-brand"> <a href="/">readSmart<a></h3>
-		          <nav class="nav nav-masthead justify-content-center">
-		            <a class="nav-link" href="/login">Home</a>
-		            <a class="nav-link" href="/booklist">Books</a>
-					<a class="nav-link active" href = "/library">Library</a>
-					<a class="nav-link" href = "/logout">Logout</a>
+				<a href="/"> <img class= "masthead-brand" style = "width: 220px; height: 60px;" src="/img/logo.png" alt="Logo"> </a>
+				<nav class="nav nav-masthead justify-content-right">
+					<a class="nav-link" style = "font-size: 24px;" href="/login">Home</a>
+					<a class="nav-link" style = "font-size: 24px;" href="/booklist">Books</a>
+					<a class="nav-link active" style = "font-size: 24px;" href = "/library">Library</a>
+					<a class="nav-link" style = "font-size: 24px;" href = "/logout">Logout</a>
+				</nav>
 
 		          </nav>
 		        </div>
