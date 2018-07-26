@@ -99,7 +99,6 @@ class BookView(webapp2.RequestHandler):
 			counter +=1
 		average = average/counter
 		item.put()
-<<<<<<< HEAD
 
 		if item.user_created == "yes":
 			print "Item Created By User"
@@ -109,10 +108,6 @@ class BookView(webapp2.RequestHandler):
 		else:
 			print "Item hardcoded"
 			self.response.write(content.render(title = item.title, id = item.id, author = item.author, code = True, user = False))
-=======
-		self.response.write(content.render(title = item.title, id = item.id, author = item.author, synopsis = item.synopsis, average = average, averageSet = True, list=list))
-		return
->>>>>>> e58f648aaf77f5b63b45e68b02a6d2e23b35ee04
 
 
 class BookHandler(webapp2.RequestHandler):
@@ -144,7 +139,7 @@ class BookHandler(webapp2.RequestHandler):
 
 				<a href="/"> <img class= "masthead-brand" style = "width: 200px; height: 50px;" src="/img/logo.png" alt="Logo"> </a>
 				<nav class="nav nav-masthead justify-content-right">
-					<a class="nav-link" style = "font-size: 24px;" href="#">Home</a>
+					<a class="nav-link" style = "font-size: 24px;" href="/login">Home</a>
 					<a class="nav-link active" style = "font-size: 24px;" href="/booklist">Books</a>
 					<a class="nav-link" style = "font-size: 24px;" href = "/library">Library</a>
 					<a class="nav-link" style = "font-size: 24px;" href = "/logout">Logout</a>
