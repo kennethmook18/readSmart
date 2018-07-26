@@ -110,7 +110,7 @@ class BookHandler(webapp2.RequestHandler):
 		      <header class="masthead mb-auto">
 		        <div class="inner">
 
-				<a href="/"> <img class= "masthead-brand" style = "width: 220px; height: 60px;" src="/img/logo.png" alt="Logo"> </a>
+				<a href="/"> <img class= "masthead-brand" style = "width: 200px; height: 50px;" src="/img/logo.png" alt="Logo"> </a>
 				<nav class="nav nav-masthead justify-content-right">
 					<a class="nav-link" style = "font-size: 24px;" href="#">Home</a>
 					<a class="nav-link active" style = "font-size: 24px;" href="/booklist">Books</a>
