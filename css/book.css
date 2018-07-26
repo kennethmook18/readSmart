@@ -89,6 +89,9 @@ div {
     padding-right: 1%;
     width: 30%;
     border-radius: 20px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: #FFFFFF
 }
 
 /* Book Title and bar */
@@ -156,7 +159,11 @@ h3 .head {
   font-family: monospace;
 
 }
-
+/* Have you read this book before? Style */
+.question {
+  color: #FFFFFF;
+  font-size: 20px;
+}
 /* Author Style */
 .author {
   color: white;
@@ -179,4 +186,7 @@ h3 .head {
   padding-right: 1%;
   width: 100%;
   border-radius: 5px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #FFFFFF;
 }
