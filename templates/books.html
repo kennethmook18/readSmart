@@ -51,7 +51,7 @@
 
                 <label class="question2" for="time" >How long did it take you to read {{ title }}?</label> <br/>
                 <div id = "get_value">
-                  <input class="form-control" type="number" name = "time" placeholder="In minutes"/>
+                  <input class="form-control" type="number" min="{{ Min }}" max="{{ Max }}" name = "time" placeholder="In minutes"/>
                   <input class="btn btn-primary" type="submit" value="Submit">
                 </div>
                 <br>
@@ -102,7 +102,7 @@
                   title: 'Times taken to read book by user',
                   legend: { position: 'none' },
                    vAxis: {title : "Number of users"},
-                   hAxis: {title : "Time taken to read book"}
+                   hAxis: {title : "Time taken to read book (minutes)"}
                 };
 
                 var chart = new google.visualization.Histogram(document.getElementById('chart_div'));

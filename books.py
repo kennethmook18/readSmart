@@ -23,6 +23,18 @@ class Books(ndb.Model):
 	bookindex = ndb.IntegerProperty(repeated = True)
 	publication_date = ndb.StringProperty()
 
+<<<<<<< HEAD
+=======
+class AddBookHandler(webapp2.RequestHandler):
+	def get(self):
+		content = TEMPLATE.get_template('templates/UserInput.html')
+		self.response.write(content.render())
+	def post(self):
+		book = Books(
+		)
+		book.put()
+
+>>>>>>> 855635251df8e844f8b23a2365bb92359698d594
 class BookView(webapp2.RequestHandler):
 	def get(self):
 		content = TEMPLATE.get_template('/templates/books.html')
@@ -39,7 +51,16 @@ class BookView(webapp2.RequestHandler):
 			counter +=1
 		if counter != 0:
 			average = average/counter
+<<<<<<< HEAD
 		self.response.write(content.render(title = item.title, id = item.id, author = item.author, synopsis = item.synopsis, average = average, list = list))
+=======
+			Max = average * 2
+			Min = average / 4
+		self.response.write(content.render(title = item.title, id = item.id, author = item.author, average = average, list = list, Max = Max, Min = Min))
+
+
+
+>>>>>>> 855635251df8e844f8b23a2365bb92359698d594
 
 
 	def post(self):
@@ -114,7 +135,7 @@ class BookHandler(webapp2.RequestHandler):
 			</div>
   			</footer>
 		""")
-
+# <form action="/addBooks"> <input type = "submit" value = "Add a new Book"> </form>
 
 
 def BookLoader():
