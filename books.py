@@ -38,6 +38,7 @@ class BookView(webapp2.RequestHandler):
 		item = Books.query().filter(Books.title == name).get()
 		average = 0
 		counter = 0
+		Max = average * 2
 		list = [["Person", "Time"]]
 		for number in item.bookindex:
 			print counter
@@ -48,6 +49,10 @@ class BookView(webapp2.RequestHandler):
 		if counter != 0:
 			average = average/counter
 		self.response.write(content.render(title = item.title, id = item.id, author = item.author, average = average, list = list))
+
+
+
+
 
 
 	def post(self):
