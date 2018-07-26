@@ -108,6 +108,10 @@ class BookView(webapp2.RequestHandler):
 		else:
 			print "Item hardcoded"
 			self.response.write(content.render(title = item.title, id = item.id, author = item.author, code = True, user = False))
+<<<<<<< HEAD
+=======
+
+>>>>>>> 79bf5ee83cabbd4d9af3dd0d0edfe3c1ae757df8
 		self.response.write(content.render(title = item.title, id = item.id, author = item.author, synopsis = item.synopsis, average = average, averageSet = True, list=list))
 		return
 
