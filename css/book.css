@@ -45,7 +45,17 @@ div {
   color: #fff;
   border-bottom-color: #fff;
 }
-
+/* Add this to my library  */
+.addButton {
+  color: #FFFFFF;
+  background-color: #000000;
+  border-radius: 5px;
+  border-color: #FFFFFF;
+  border-width: 2px;
+  font-size: 15px;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
 #chart_div{
    margin: auto;
    width: 50%;
@@ -186,7 +196,7 @@ h3 .head {
 /* Go Back Button */
 .goback{
   color: white;
-  background-color: black;
+  background-color: #000000;
   /* font-size: 2vw; */
   font-size: 20px;
   /* height: 20px; */
