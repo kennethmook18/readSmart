@@ -101,8 +101,12 @@ class PersonalLibrary(webapp2.RequestHandler):
 				print item
 				book = self.request.get("book")
 				print book
-				item.user_library.append(book)
-				item.put()
+				if book in item.user_library:
+					self.redirect('/library')
+				else:
+					item.user_library.append(book)
+					item.put()
+					self.redirect('/library')
 
 
 class MainHandler(webapp2.RequestHandler):
