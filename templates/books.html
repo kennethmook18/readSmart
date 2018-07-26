@@ -16,19 +16,22 @@
               <left><img src="/img/{{ id }}.jpg" alt="{{ title }} Cover"></left>
 
               </div>
+              <br>
+              <p class="author"> {{ author }} </p>
+              <p class="synopsis"> {{ synopsis }} </p>
+              
               <form id="library_button" action="/library" method="post">
                   <input type="text" name="book" style="visibility:hidden" value="{{ title }}">
                   <!-- <script>
                     console.log(document.getElementById('book').value)
                   </script> -->
                   <br>
-                  <input type="submit" id="add" value="Add this to my library">
+                  <br>
+                  <center><input class= "addButton" type="submit" id="add" value="Add this book to my library"></center>
 
               </form>
 
-              <br>
-              <p class="author"> {{ author }} </p>
-              <br>
+
 
               <div id="averageset">
               {% if averageSet %}
@@ -111,6 +114,6 @@
               </script>
               <!-- <script type="text/javascript" src="/javascript/buttons.js"></script> -->
 
-              <!-- <p> {{ synopsis }}</p> -->
+              <!-- <p> </p> -->
         </body>
 </html>
