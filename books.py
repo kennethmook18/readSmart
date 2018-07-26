@@ -23,13 +23,13 @@ class Books(ndb.Model):
 	publication_date = ndb.StringProperty()
 
 
-class PersonalLibrary(webapp2.RequestHandler):
-	def get(self):
-		content = TEMPLATE.get_template('/templates/library.html')
-		user = self.request.cookies.get("name")
-		q = CssiUser.query().filter("first_name" == user).fetch()
-		self.response.write(q.first_name+ " " + q.last_name)
-		self.response.write(content.render())
+# class PersonalLibrary(webapp2.RequestHandler):
+# 	def get(self):
+# 		content = TEMPLATE.get_template('/templates/library.html')
+# 		user = self.request.cookies.get("name")
+# 		q = CssiUser.query().filter("first_name" == user).fetch()
+# 		self.response.write(q.first_name+ " " + q.last_name)
+# 		self.response.write(content.render())
 
 class BookView(webapp2.RequestHandler):
 	def get(self):
