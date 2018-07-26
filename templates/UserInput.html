@@ -26,7 +26,7 @@
       </header>
       <img src="/img/logo.png" alt="Logo">
 
-      <form data-toggle="validator" id = "login_form" action="/login" method="post">
+      <form data-toggle="validator" id = "login_form" action="/addBooks" method="post" enctype="multipart/form-data">
         <div class="form-group valid-form">
           <input type="text" class="form-control" id="bookTitle" name="bookTitle" placeholder="Book Title" required="">
         </div>
@@ -34,12 +34,15 @@
         <div class="form-group valid-form">
           <input type="text" class="form-control" id="authorName" name="authorName" placeholder="Author Name" required="">
         </div>
+
         <div class="form-group valid-form">
           <input type="file" class="form-control" id="imageFile" name="imageFile" required="">
         </div>
+
         <div class="form-group valid-form">
           <input type="textarea" class="form-control" id="synopsis" name="synopsis" placeholder="Synopsis" required="" style="height:100px;">
         </div>
+
 
         <div id="hidden_text">
           <p>In the synopsis, write a short summary of the book that you plan on adding</p>

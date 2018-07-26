@@ -22,6 +22,9 @@ class Books(ndb.Model):
 	persons_input = ndb.IntegerProperty()
 	bookindex = ndb.IntegerProperty(repeated = True)
 	publication_date = ndb.StringProperty()
+	image_file = ndb.BlobProperty()
+	synopsis = ndb.StringProperty()
+	user_created = ndb.StringProperty()
 
 class AddBookHandler(webapp2.RequestHandler):
 	def get(self):
@@ -29,8 +32,18 @@ class AddBookHandler(webapp2.RequestHandler):
 		self.response.write(content.render())
 	def post(self):
 		book = Books(
-
+			title = self.request.get("bookTitle"),
+			image_file = self.request.get("imageFile"),
+			author =  self.request.get("authorName"),
+			synopsis = self.request.get("synopsis"),
+			id = "",
+			persons_input = 0,
+			bookindex = [],
+			publication_date = "",
+			user_created = "yes"
 		)
+		s = str(book.image_file).encode('base64')
+		# <img src="data:image/jpg;base64,{{s}}">
 		book.put()
 
 class BookView(webapp2.RequestHandler):
@@ -42,6 +55,8 @@ class BookView(webapp2.RequestHandler):
 		Max=0
 		Min=0
 		counter = 0
+		Max = 1000
+		Min = 0
 		list = [["Person", "Time"]]
 		for number in item.bookindex:
 			print counter
@@ -53,11 +68,16 @@ class BookView(webapp2.RequestHandler):
 			average = average/counter
 			Max = average * 2
 			Min = average / 4
-		self.response.write(content.render(title = item.title, id = item.id, author = item.author, synopsis = item.synopsis, average = average, list = list, Max = Max, Min = Min))
-
-
-
-
+		if item.user_created == "yes":
+			print "Item Created By User"
+			s = str(item.image_file).encode('base64')
+			print s
+			self.response.write(content.render(title = item.title, s = s, author = item.author, user = True, code = False))
+		else:
+			print "Item hardcoded"
+			self.response.write(content.render(title = item.title, id = item.id, author = item.author, code = True, user = False))
+		# self.response.write(content.render(title = item.title, id = item.id, author = item.author, average = average, list = list, Max = Max, Min = Min))
+		#synopsis = item.synopsis
 
 
 
@@ -79,8 +99,15 @@ class BookView(webapp2.RequestHandler):
 			counter +=1
 		average = average/counter
 		item.put()
-		self.response.write(content.render(title = item.title, id = item.id, author = item.author, synopsis = item.synopsis, average = average, averageSet = True, list=list))
-		return
+
+		if item.user_created == "yes":
+			print "Item Created By User"
+			s = str(item.image_file).encode('base64')
+			print s
+			self.response.write(content.render(title = item.title, s = s, author = item.author, user = True, code = False))
+		else:
+			print "Item hardcoded"
+			self.response.write(content.render(title = item.title, id = item.id, author = item.author, code = True, user = False))
 
 
 class BookHandler(webapp2.RequestHandler):
@@ -112,7 +139,7 @@ class BookHandler(webapp2.RequestHandler):
 
 				<a href="/"> <img class= "masthead-brand" style = "width: 200px; height: 50px;" src="/img/logo.png" alt="Logo"> </a>
 				<nav class="nav nav-masthead justify-content-right">
-					<a class="nav-link" style = "font-size: 24px;" href="#">Home</a>
+					<a class="nav-link" style = "font-size: 24px;" href="/login">Home</a>
 					<a class="nav-link active" style = "font-size: 24px;" href="/booklist">Books</a>
 					<a class="nav-link" style = "font-size: 24px;" href = "/library">Library</a>
 					<a class="nav-link" style = "font-size: 24px;" href = "/logout">Logout</a>
@@ -122,10 +149,20 @@ class BookHandler(webapp2.RequestHandler):
 
 			  <div id = book_container">
 		""")
+
 		for item in q:
-			self.response.write(content.render(title = item.title, id = item.id, author = item.author))
+			# self.response.write(content.render(title = item.title, id = item.id, author = item.author))
+			if item.user_created == "yes":
+				print "Item Created By User"
+				s = str(item.image_file).encode('base64')
+				print s
+				self.response.write(content.render(title = item.title, s = s, author = item.author, user = True, code = False))
+			else:
+				print "Item hardcoded"
+				self.response.write(content.render(title = item.title, id = item.id, author = item.author, code = True, user = False))
 		self.response.write("""
 			</div>
+			<form action="/addBooks"> <input type = "submit" value = "Add a new Book"> </form>
 			<footer class="mastfoot mt-auto">
 			<div class="inner">
 	  		<p>readSmart&copy; Federick Gonzalez, Casey Mook, and Jaylen Patterson</p>
@@ -146,7 +183,8 @@ def BookLoader():
 		id = "lordflies",
 		persons_input = 0,
 		bookindex = [180,230,120,180,210,240,240,180,240,270,240,180,270,270,240,270,210,270,300,300,180,160,330,230,120,360,140],
-		publication_date = "September 17, 1954"
+		publication_date = "September 17, 1954",
+		user_created = "no"
 	)
 	book.put()
 	book = Books(
@@ -156,7 +194,8 @@ def BookLoader():
 		id = "GreatGatsby",
 		persons_input = 0,
 		bookindex = [180,210,120,150,180,90,180,180,150,270,120,180,120,240,300,180,120,90,230,230,110,130,120,140,160,140,150,70,80,100,110,90,220,230,210,70,80,80],
-		publication_date = "April 10, 1925"
+		publication_date = "April 10, 1925",
+		user_created = "no"
 	)
 	book.put()
 
@@ -167,7 +206,8 @@ def BookLoader():
 		id = "KillMock",
 		persons_input = 0,
 		bookindex = [390,260,270,330,300,360,240,360,390,330,270,420,390,260,290,280,300,310,300,340,350,330,340,370,350,360,340,350,320,330,310,360,330,320,330],
-		publication_date = "July 11, 1960"
+		publication_date = "July 11, 1960",
+		user_created = "no"
 	)
 	book.put()
 	book = Books(
@@ -177,7 +217,8 @@ def BookLoader():
 		id = "RomeoJuliet",
 		persons_input = 0,
 		bookindex = [360,420,240,240,300,240,270,300,300,240,330,180,300,300,300,280,370,240,300,420,270,160,150,260,270,280,290,270,260,360,350],
-		publication_date = "1597"
+		publication_date = "1597",
+		user_created = "no"
 	)
 	book.put()
 	book = Books(
@@ -187,7 +228,8 @@ def BookLoader():
 		id = "Macbeth",
 		persons_input = 0,
 		bookindex = [300,150,210,270,150,270,240,180,210,210,240,180,270,360,200,200,200,200,120,160,170,180,190,260,270,140,130,310,320,120,120,130,90,200,190],
-		publication_date = "1606"
+		publication_date = "1606",
+		user_created = "no"
 	)
 	book.put()
 
@@ -198,7 +240,8 @@ def BookLoader():
 		id = "HuckFinn",
 		persons_input = 0,
 		bookindex = [120,120,180,210,210,180,300,210,180,270,150,160,170,180,150,160,170,210,220,180,190,200,200,210,280,270,260,110,100,110,115,270,260,330,140,130],
-		publication_date = "December 10, 1884"
+		publication_date = "December 10, 1884",
+		user_created = "no"
 	)
 	book.put()
 	book = Books(
@@ -208,7 +251,8 @@ def BookLoader():
 		id = "Giver",
 		persons_input = 0,
 		bookindex = [90,120,180,210,180,150,240,120,120,170,180,210,270,240,170,240,90,120,150,130,90,200,200,210,140,250,200,200,220,220,160,170,160,170,190,190,160,160,80],
-		publication_date = "1993"
+		publication_date = "1993",
+		user_created = "no"
 	)
 	book.put()
 
@@ -219,7 +263,8 @@ def BookLoader():
 		id = "Hamlet",
 		persons_input = 0,
 		bookindex = [200, 250,260,270, 300, 210, 330, 300, 330, 300, 270, 270,330,330, 390,330,290,290,280,300,290,330,320,280,270,250,240,230,220,210,200,350,310,370,380,400,270,280,290,290,290,290,290,320,320,250,240,240,230,370,380],
-		publication_date = "1603"
+		publication_date = "1603",
+		user_created = "no"
 	)
 	book.put()
 	book = Books(
@@ -229,7 +274,8 @@ def BookLoader():
 		id = "Fah451",
 		persons_input = 0,
 		bookindex = [150,210,240,150,240,270,180,150,240,180,330,220,200,190,180,230,240,210,260,250,290,180,190,200,180,120,110,210,220,220,300],
-		publication_date = "October 1953"
+		publication_date = "October 1953",
+		user_created = "no"
 	)
 	book.put()
 
@@ -240,7 +286,8 @@ def BookLoader():
 		id = "HarryPot",
 		persons_input = 0,
 		bookindex = [210,180,270,300,180,300,180,330,240,300,390,360,270,260,240,250,280,140,410,230,280,270,260,250,240,230,300],
-		publication_date = "June 26, 1997"
+		publication_date = "June 26, 1997",
+		user_created = "no"
 	)
 	book.put()
 	book = Books(
@@ -250,7 +297,8 @@ def BookLoader():
 		id = "Hunger",
 		persons_input = 0,
 		bookindex = [270,270,240,330,300,300,240,360,390,300,360,310,330,330,360,360,270,360,350,340,330,320,310,290,280,400,260,350,320,330,430,330,390],
-		publication_date = "September 14, 2008"
+		publication_date = "September 14, 2008",
+		user_created = "no"
 	)
 	book.put()
 
@@ -261,6 +309,7 @@ def BookLoader():
 		id = "Narnia",
 		persons_input = 0,
 		bookindex = [270,150,180,210,120,210,180,150,300,150,240,150,160,170,180,190,200,210,220,230,240,250,260,270,180,170,160,150,140,130,120,130,160,150,170,180,190,80,90,130,140,130,130],
-		publication_date = "October 16, 1950"
+		publication_date = "October 16, 1950",
+		user_created = "no"
 	)
 	book.put()
