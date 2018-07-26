@@ -39,6 +39,8 @@ class BookView(webapp2.RequestHandler):
 		name = self.request.get("title")
 		item = Books.query().filter(Books.title == name).get()
 		average = 0
+		Max=0
+		Min=0
 		counter = 0
 		list = [["Person", "Time"]]
 		for number in item.bookindex:
