@@ -1,6 +1,7 @@
 import webapp2
 import jinja2
 import os
+from main import *
 from google.appengine.api import users
 from google.appengine.ext import ndb
 import logging
@@ -13,7 +14,6 @@ TEMPLATE = jinja2.Environment(
 )
 
 
-
 class Books(ndb.Model):
 	title = ndb.StringProperty()
 	author = ndb.StringProperty()
@@ -23,9 +23,13 @@ class Books(ndb.Model):
 	publication_date = ndb.StringProperty()
 
 
-class PersonalLibrary(webapp2.RequestHandler):
-	def get(self):
-		content = TEMPLATE.get_template('/tempates/library.html')
+# class PersonalLibrary(webapp2.RequestHandler):
+# 	def get(self):
+# 		content = TEMPLATE.get_template('/templates/library.html')
+# 		user = self.request.cookies.get("name")
+# 		q = CssiUser.query().filter("first_name" == user).fetch()
+# 		self.response.write(q.first_name+ " " + q.last_name)
+# 		self.response.write(content.render())
 
 class BookView(webapp2.RequestHandler):
 	def get(self):
@@ -71,7 +75,7 @@ class BookHandler(webapp2.RequestHandler):
 	def get(self):
 		content = TEMPLATE.get_template('/templates/book.html')
 		q = Books.query().fetch()
-		#
+
 		self.response.write("""
 		<html lang="en" dir="ltr">
 		  <head>
@@ -96,8 +100,9 @@ class BookHandler(webapp2.RequestHandler):
 
 		          <h3 class="masthead-brand"> <a href="/">readSmart<a></h3>
 		          <nav class="nav nav-masthead justify-content-center">
-		            <a class="nav-link" href="/">Home</a>
+		            <a class="nav-link" href="/login">Home</a>
 		            <a class="nav-link active" href="/booklist">Books</a>
+					<a class="nav-link" href = "/library">Library</a>
 					<a class="nav-link" href = "/logout">Logout</a>
 
 		          </nav>

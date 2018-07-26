@@ -5,17 +5,26 @@
         <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
         <!-- <link href="/css/bootstrap.min.css" rel="stylesheet"> -->
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet">
 
         </head>
         <body onload="drawChart({{ list }})">
-
-              <br>
               <h1> {{ title }} </h1>
               <br>
 
               <div class="container">
               <left><img src="/img/{{ id }}.jpg" alt="{{ title }} Cover"></left>
+
               </div>
+              <form id="library_button" action="/library" method="post">
+                  <input type="text" name="book" style="visibility:hidden" value="{{ title }}">
+                  <!-- <script>
+                    console.log(document.getElementById('book').value)
+                  </script> -->
+                  <br>
+                  <input type="submit" id="add" value="Add this to my library">
+
+              </form>
 
               <br>
               <p class="author"> {{ author }} </p>
@@ -33,7 +42,7 @@
               </div>
               <form id = "yesnobuttons">
 
-                <p>Have you read this book before?</p>
+                <p class = "question">Have you read this book before?</p>
                 <input class="yesno" type="button" id="yes"name="yes" value="Yes">
                 <input class="yesno" type="button" id="no"name="no" value="No">
               </form>
@@ -49,9 +58,9 @@
               </form>
 
               <!-- <input type="button" id="chart" name="chart" value="View Chart" onclick="drawChart({{ list }})"> -->
+
               <div id="chart_div" style="width: 900px; height: 500px;"></div>
               <p><a class="goback" href = "/booklist">Go back</a></p>
-
 
 
               <footer class="mastfoot mt-auto">
@@ -86,12 +95,14 @@
 
               google.charts.load("current", {packages:["corechart"]});
               // google.charts.setOnLoadCallback(drawChart);
-              function drawChart(list) {
+              function drawChart(list, name) {
                 console.log("Drawing chart")
                 var data = google.visualization.arrayToDataTable(list);
                 var options = {
-                  title: 'Time taken to read',
+                  title: 'Times taken to read book by user',
                   legend: { position: 'none' },
+                   vAxis: {title : "Number of users"},
+                   hAxis: {title : "Time taken to read book"}
                 };
 
                 var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
