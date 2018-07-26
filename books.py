@@ -50,7 +50,10 @@ class BookView(webapp2.RequestHandler):
 			average = average/counter
 			Max = average * 2
 			Min = average / 4
-		self.response.write(content.render(title = item.title, id = item.id, author = item.author, average = average, list = list, Max = Max, Min = Min))
+		self.response.write(content.render(title = item.title, id = item.id, author = item.author, synopsis = item.synopsis, average = average, list = list, Max = Max, Min = Min))
+
+
+
 
 
 
