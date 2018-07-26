@@ -9,7 +9,14 @@
               <br>
               <h1> <a href = "/bookview?title={{title}}">{{ title }} </a></h1>
               <br>
-              <center><a href = "/bookview?title={{title}}"><img src="/img/{{ id }}.jpg" alt="{{ title }} Cover"></a></center>
+              {% if code %}
+              <center><a href = "/bookview?title={{title}}"><img src="/img/{{id}}.jpg" alt="{{ title }} Cover"></a></center>
+              {% endif %}
+
+              {% if user %}
+              <center><a href = "/bookview?title={{title}}"><img src="data:image/jpg;base64,{{s}}" alt ="{{ title }} Cover"></a></center>
+              {% endif %}
+
               <br>
               <p> {{ author }} </p>
               <br>
