@@ -87,6 +87,11 @@ div {
   font-size: 20px;
 
 }
+/* Synopsis Style */
+.synopsis {
+  color: #FFFFFF
+}
+
 /* Yes and No button options */
 .yesno{
 
