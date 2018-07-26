@@ -22,14 +22,14 @@ class Books(ndb.Model):
 	bookindex = ndb.IntegerProperty(repeated = True)
 	publication_date = ndb.StringProperty()
 
-
-# class PersonalLibrary(webapp2.RequestHandler):
-# 	def get(self):
-# 		content = TEMPLATE.get_template('/templates/library.html')
-# 		user = self.request.cookies.get("name")
-# 		q = CssiUser.query().filter("first_name" == user).fetch()
-# 		self.response.write(q.first_name+ " " + q.last_name)
-# 		self.response.write(content.render())
+class AddBookHandler(webapp2.RequestHandler):
+	def get(self):
+		content = TEMPLATE.get_template('templates/UserInput.html')
+		self.response.write(content.render())
+	def post(self):
+		book = Books(
+		)
+		book.put()
 
 class BookView(webapp2.RequestHandler):
 	def get(self):
@@ -38,7 +38,6 @@ class BookView(webapp2.RequestHandler):
 		item = Books.query().filter(Books.title == name).get()
 		average = 0
 		counter = 0
-		Max = average * 2
 		list = [["Person", "Time"]]
 		for number in item.bookindex:
 			print counter
@@ -48,7 +47,12 @@ class BookView(webapp2.RequestHandler):
 			counter +=1
 		if counter != 0:
 			average = average/counter
-		self.response.write(content.render(title = item.title, id = item.id, author = item.author, average = average, list = list))
+			Max = average * 2
+			Min = average / 4
+		self.response.write(content.render(title = item.title, id = item.id, author = item.author, average = average, list = list, Max = Max, Min = Min))
+
+
+
 
 
 	def post(self):
@@ -115,10 +119,6 @@ class BookHandler(webapp2.RequestHandler):
 		for item in q:
 			self.response.write(content.render(title = item.title, id = item.id, author = item.author))
 		self.response.write("""
-<<<<<<< HEAD
-=======
-
->>>>>>> b69986033ecee215fdcd94a5617eb8a5d9a599bf
 			</div>
 			<footer class="mastfoot mt-auto">
 			<div class="inner">
