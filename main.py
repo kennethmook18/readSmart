@@ -90,7 +90,14 @@ class PersonalLibrary(webapp2.RequestHandler):
 				for value in item.user_library:
 					for book in books:
 						if value == book.title:
-							self.response.write(content.render(title = book.title, id = book.id, author = book.author))
+							if book.user_created == "yes":
+								print "Item Created By User"
+								s = str(book.image_file).encode('base64')
+								print s
+								self.response.write(content.render(title = book.title, s = s, author = book.author, user = True, code = False))
+							else:
+								print "Item hardcoded"
+								self.response.write(content.render(title = book.title, id = book.id, author = book.author, code = True, user = False))
 				return
 	def post(self):
 		print "Post method called"
