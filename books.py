@@ -22,6 +22,10 @@ class Books(ndb.Model):
 	bookindex = ndb.IntegerProperty(repeated = True)
 	publication_date = ndb.StringProperty()
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 24cfc9ef58c61c99330a32c81867314e723c15ca
 class AddBookHandler(webapp2.RequestHandler):
 	def get(self):
 		content = TEMPLATE.get_template('templates/UserInput.html')
@@ -32,6 +36,10 @@ class AddBookHandler(webapp2.RequestHandler):
 		)
 		book.put()
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 24cfc9ef58c61c99330a32c81867314e723c15ca
 class BookView(webapp2.RequestHandler):
 	def get(self):
 		content = TEMPLATE.get_template('/templates/books.html')
@@ -53,9 +61,12 @@ class BookView(webapp2.RequestHandler):
 		self.response.write(content.render(title = item.title, id = item.id, author = item.author, average = average, list = list, Max = Max, Min = Min))
 
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 24cfc9ef58c61c99330a32c81867314e723c15ca
 	def post(self):
 		content = TEMPLATE.get_template('/templates/books.html')
 		name = self.request.get("title")
