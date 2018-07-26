@@ -23,7 +23,6 @@ class Books(ndb.Model):
 	bookindex = ndb.IntegerProperty(repeated = True)
 	publication_date = ndb.StringProperty()
 
-
 class AddBookHandler(webapp2.RequestHandler):
 	def get(self):
 		content = TEMPLATE.get_template('templates/UserInput.html')
@@ -32,7 +31,6 @@ class AddBookHandler(webapp2.RequestHandler):
 		book = Books(
 		)
 		book.put()
-
 
 class BookView(webapp2.RequestHandler):
 	def get(self):
@@ -52,7 +50,10 @@ class BookView(webapp2.RequestHandler):
 			average = average/counter
 			Max = average * 2
 			Min = average / 4
-		self.response.write(content.render(title = item.title, id = item.id, author = item.author, average = average, list = list, Max = Max, Min = Min))
+		self.response.write(content.render(title = item.title, id = item.id, author = item.author, synopsis = item.synopsis, average = average, list = list, Max = Max, Min = Min))
+
+
+
 
 
 	def post(self):
