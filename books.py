@@ -97,8 +97,14 @@ class BookView(webapp2.RequestHandler):
 		average = average/counter
 		item.put()
 
-		self.response.write(content.render(title = item.title, id = item.id, author = item.author, average = average, averageSet = True, list=list))
-		return
+		if item.user_created == "yes":
+			print "Item Created By User"
+			s = str(item.image_file).encode('base64')
+			print s
+			self.response.write(content.render(title = item.title, s = s, author = item.author, user = True, code = False))
+		else:
+			print "Item hardcoded"
+			self.response.write(content.render(title = item.title, id = item.id, author = item.author, code = True, user = False))
 
 
 class BookHandler(webapp2.RequestHandler):
