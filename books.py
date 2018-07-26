@@ -96,7 +96,7 @@ class BookHandler(webapp2.RequestHandler):
 
 		          <h3 class="masthead-brand"> <a href="/">readSmart<a></h3>
 		          <nav class="nav nav-masthead justify-content-center">
-		            <a class="nav-link" href="/">Home</a>
+		            <a class="nav-link" href="/login">Home</a>
 		            <a class="nav-link active" href="/booklist">Books</a>
 					<a class="nav-link" href = "/logout">Logout</a>
 
