@@ -115,6 +115,10 @@ class BookHandler(webapp2.RequestHandler):
 		for item in q:
 			self.response.write(content.render(title = item.title, id = item.id, author = item.author))
 		self.response.write("""
+<<<<<<< HEAD
+=======
+
+>>>>>>> b69986033ecee215fdcd94a5617eb8a5d9a599bf
 			</div>
 			<footer class="mastfoot mt-auto">
 			<div class="inner">
@@ -123,7 +127,7 @@ class BookHandler(webapp2.RequestHandler):
 			</div>
   			</footer>
 		""")
-
+# <form action="/addBooks"> <input type = "submit" value = "Add a new Book"> </form>
 
 
 def BookLoader():
