@@ -23,16 +23,15 @@ class Books(ndb.Model):
 	bookindex = ndb.IntegerProperty(repeated = True)
 	publication_date = ndb.StringProperty()
 
-
 class AddBookHandler(webapp2.RequestHandler):
 	def get(self):
 		content = TEMPLATE.get_template('templates/UserInput.html')
 		self.response.write(content.render())
 	def post(self):
 		book = Books(
+
 		)
 		book.put()
-
 
 class BookView(webapp2.RequestHandler):
 	def get(self):
@@ -40,6 +39,8 @@ class BookView(webapp2.RequestHandler):
 		name = self.request.get("title")
 		item = Books.query().filter(Books.title == name).get()
 		average = 0
+		Max=0
+		Min=0
 		counter = 0
 		list = [["Person", "Time"]]
 		for number in item.bookindex:
@@ -52,7 +53,13 @@ class BookView(webapp2.RequestHandler):
 			average = average/counter
 			Max = average * 2
 			Min = average / 4
-		self.response.write(content.render(title = item.title, id = item.id, author = item.author, average = average, list = list, Max = Max, Min = Min))
+		self.response.write(content.render(title = item.title, id = item.id, author = item.author, synopsis = item.synopsis, average = average, list = list, Max = Max, Min = Min))
+
+
+
+
+
+
 
 
 	def post(self):
@@ -116,7 +123,7 @@ class BookHandler(webapp2.RequestHandler):
 			  <div id = book_container">
 		""")
 		for item in q:
-			self.response.write(content.render(title = item.title, id = item.id, author = item.author, synopsis = item.synopsis))
+			self.response.write(content.render(title = item.title, id = item.id, author = item.author))
 		self.response.write("""
 			</div>
 			<footer class="mastfoot mt-auto">
@@ -229,7 +236,7 @@ def BookLoader():
 	book = Books(
 		title = "Harry Potter and the Sorcerer's Stone",
 		author = "J.K. Rowling",
-		synopsis = "The first book in the Harry Potter Series",
+		synopsis = "The first book in the Harry Potter series.",
 		id = "HarryPot",
 		persons_input = 0,
 		bookindex = [210,180,270,300,180,300,180,330,240,300,390,360,270,260,240,250,280,140,410,230,280,270,260,250,240,230,300],
