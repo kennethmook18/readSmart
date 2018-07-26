@@ -35,6 +35,7 @@ class CssiUser(ndb.Model):
 	email = ndb.StringProperty()
 	password = ndb.StringProperty()
 	location = ndb.StringProperty()
+	user_library = ndb.StringProperty(repeated = True)
 
 
 
@@ -91,6 +92,8 @@ class LoginHandler(webapp2.RequestHandler):
 			if user.username != username or user.password != password or user.email != username:
 				user_signed_in = False
 				self.response.delete_cookie("logged_in")
+				self.response.delete_cookie("name")
+
 
 		if not user_signed_in:
 			content = TEMPLATE.get_template('/templates/signIn.html')
@@ -105,6 +108,8 @@ class LoginHandler(webapp2.RequestHandler):
 class LogoutHandler(webapp2.RequestHandler):
 	def get(self):
 		self.response.delete_cookie("logged_in")
+		self.response.delete_cookie("name")
+
 		self.redirect('/')
 
 

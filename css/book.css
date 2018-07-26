@@ -103,7 +103,10 @@ h1 {
   padding-bottom: 3%;
   text-align: center;
   width: 100%;
-  font-family: "Courier New", monospace;
+  /* font-family: "Courier New", monospace; */
+  /* font-family: 'Ubuntu', sans-serif; */
+  font-family: 'Ubuntu Mono', monospace;
+
   border-radius: 25px;
 /* Keeps the title as you scroll down the page */
   position: sticky;
