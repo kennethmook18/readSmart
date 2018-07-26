@@ -33,14 +33,14 @@
               </div>
               <form id = "yesnobuttons">
 
-                <p class = "question">Have you read this book before?</p>
+                <p class = "question1">Have you read this book before?</p>
                 <input class="yesno" type="button" id="yes"name="yes" value="Yes">
                 <input class="yesno" type="button" id="no"name="no" value="No">
               </form>
 
               <form id ="userinput" action = "/bookview?title={{ title }}" method = "post">
 
-                <label for="time" >How long did it take you to read {{ title }}?</label> <br/>
+                <label class="question2" for="time" >How long did it take you to read {{ title }}?</label> <br/>
                 <div id = "get_value">
                   <input class="form-control" type="number" name = "time" placeholder="In minutes"/>
                   <input class="btn btn-primary" type="submit" value="Submit">

@@ -160,8 +160,13 @@ h3 .head {
 
 }
 /* Have you read this book before? Style */
-.question {
+.question1 {
   color: #FFFFFF;
+  font-size: 20px;
+}
+/* How long did it take you to read style */
+.question2 {
+  color: #000000;
   font-size: 20px;
 }
 /* Author Style */
@@ -176,7 +181,7 @@ h3 .head {
   color: white;
   background-color: black;
   /* font-size: 2vw; */
-  font-size: 15px;
+  font-size: 20px;
   /* height: 20px; */
   text-align: center;
   margin: 0px;
