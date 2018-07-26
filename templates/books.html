@@ -17,10 +17,7 @@
 
               </div>
               <form id="library_button" action="/library" method="post">
-                  <input type="text" name="book" style="visibility:hidden" value="{{ title }}">
-                  <!-- <script>
-                    console.log(document.getElementById('book').value)
-                  </script> -->
+                  <input type="text" name="book" id="book_text_box" value="{{ title }}">
                   <br>
                   <input type="submit" id="add" value="Add this to my library">
 
